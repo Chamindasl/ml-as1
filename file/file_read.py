@@ -32,21 +32,29 @@ def process_line(one_line):
     room_type_id = add_keys_with_idx(room_types, room_type)
     neighbourhood_group_id = add_keys_with_idx(neighbourhood_groups, neighbourhood_group)
     neighbourhood_id = add_keys_with_idx(neighbourhoods, neighbourhood)
+    reviews_per_month = cleanse_reviews_per_month(reviews_per_month)
     price_data.append((
                       name,
                       host_id,
                       room_type_id,
                       neighbourhood_group_id,
                       neighbourhood_id,
-                      latitude,
-                      longitude,
-                      price,
-                      minimum_nights,
-                      number_of_reviews,
+                      float(latitude),
+                      float(longitude),
+                      int(price),
+                      int(minimum_nights),
+                      int(number_of_reviews),
                       last_review,
-                      reviews_per_month,
-                      calculated_host_listings_count,
-                      availability_365))
+                      float(reviews_per_month),
+                      int(calculated_host_listings_count),
+                      int(availability_365)))
+
+
+def cleanse_reviews_per_month(reviews_per_month):
+    try:
+        return float(reviews_per_month)
+    except ValueError:
+        return 0
 
 
 def build_dto():
