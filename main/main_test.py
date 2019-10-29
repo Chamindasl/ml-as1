@@ -1,7 +1,8 @@
 from const import *
 from file.file_read import process_data_file
-from utils.data import slice_data
+from utils.data import vertical_slice_data
 from utils.data import sort_data
+from utils.data import summary
 import matplotlib.pyplot as plt
 
 data_file = process_data_file()
@@ -10,12 +11,14 @@ print(F_NUMBER_OF_REVIEWS)
 
 sorted_by_reviews = sort_data(price_data,  F_PRICE[1])
 
-num_of_reviews = slice_data(sorted_by_reviews, F_NUMBER_OF_REVIEWS[1])
-room_type_ids = slice_data(sorted_by_reviews, F_ROOM_TYPE_ID[1])
-price = slice_data(sorted_by_reviews, F_PRICE[1])
+num_of_reviews = vertical_slice_data(sorted_by_reviews, F_NUMBER_OF_REVIEWS[1])
+room_type_ids = vertical_slice_data(sorted_by_reviews, F_ROOM_TYPE_ID[1])
+price = vertical_slice_data(sorted_by_reviews, F_PRICE[1])
 
 print(max(price))
 plt.hist(price, density=True, bins=50)
+
+print(summary(price_data, [F_PRICE, F_NUMBER_OF_REVIEWS]))
 #plt.scatter(room_type_ids, price, alpha=0.1)
 #plt.scatter( num_of_reviews, price, alpha=0.1)
 #plt.ylim(1, 10)
