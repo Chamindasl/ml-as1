@@ -1,4 +1,6 @@
 from utils.math import count_min_mean_median_mode_sd_max
+import itertools
+import operator
 
 
 def vertical_slice_data(data: list, index):
@@ -7,6 +9,16 @@ def vertical_slice_data(data: list, index):
 
 def sort_data(data: tuple, index):
     return sorted(data, key=lambda x: x[index])
+
+
+def group_by(data: list, index):
+    groups = {}
+    for i in data:
+        if i[index] in groups:
+            groups[i[index]].append(i)
+        else:
+            groups[i[index]] = list(i)
+    return groups
 
 
 def summary(data: list, fields: list):
