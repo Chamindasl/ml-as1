@@ -19,8 +19,16 @@ def median(data: list):
 
 
 def mode(data: list):
-    get_mode = dict(Counter(data))
-    return [k for k, v in get_mode.items() if v == max(list(data.values()))]
+    counter = Counter(data)
+    common = counter.most_common()
+    first_common = common[0]
+    all_modes = []
+    for i, j in common:
+        if first_common[1] == j:
+            all_modes.append((i, j))
+        else:
+            break
+    return all_modes
 
 
 def sd(data: list):
@@ -31,11 +39,12 @@ def sd(data: list):
     return math.sqrt(total * 1.0 / (len(data) - 1))
 
 
-def count_min_mean_median_mode_sd_max(data:list):
+def count_min_mean_median_mode_sd_max(data: list):
     return {
                "count": count(data),
                "min": min(data),
                "mean": mean(data),
+               "mode": mode(data),
                "median": median(data),
                "sd": sd(data),
                "max": max(data)
