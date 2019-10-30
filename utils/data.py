@@ -1,6 +1,4 @@
 from utils.math import count_min_mean_median_mode_sd_max
-import itertools
-import operator
 
 
 def vertical_slice_data(data: list, index):
