@@ -1,7 +1,7 @@
 from db import connection
 
 
-def read_price_data():
+def read_ab_data():
     con = connection.connect()
     cur = con.cursor();
     cur.execute('SELECT '
@@ -19,7 +19,7 @@ def read_price_data():
                     'p.reviews_per_month,'
                     'p.calculated_host_listings_count,'
                     'p.availability_365 '
-                'FROM price_data p '
+                'FROM ab_data p '
                 'INNER JOIN room_types r '
                 'ON p.room_type_id = r.id '
                 'INNER JOIN neighbourhood_groups ng '

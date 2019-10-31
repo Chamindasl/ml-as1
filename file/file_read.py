@@ -1,7 +1,7 @@
 room_types = []
 neighbourhood_groups = []
 neighbourhoods = []
-price_data = []
+ab_data = []
 
 
 def process_data_file(file="../data/AB_NYC_2019.csv"):
@@ -33,7 +33,7 @@ def process_line(one_line):
     neighbourhood_group_id = add_keys_with_idx(neighbourhood_groups, neighbourhood_group)
     neighbourhood_id = add_keys_with_idx(neighbourhoods, neighbourhood)
     reviews_per_month = cleanse_reviews_per_month(reviews_per_month)
-    price_data.append((
+    ab_data.append((
                       name,
                       host_id,
                       room_type_id,
@@ -62,5 +62,5 @@ def build_dto():
         "room_types": room_types,
         "neighbourhood_groups": neighbourhood_groups,
         "neighbourhoods": neighbourhoods,
-        "price_data": price_data
+        "ab_data": ab_data
     }

@@ -1,6 +1,13 @@
 from db import connection
 
 
+def insert_all_data(all_data: dict):
+    insert_room_types(all_data["room_types"])
+    insert_neighbourhood_groups(all_data["neighbourhood_groups"])
+    insert_neighbourhoods(all_data["neighbourhoods"])
+    insert_ab_data(all_data["ab_data"])
+
+
 def insert_room_types(room_types: list):
     insert_to_table(room_types, 'INSERT INTO room_types VALUES (?,?)')
 
@@ -13,8 +20,8 @@ def insert_neighbourhoods(neighbourhoods: list):
     insert_to_table(neighbourhoods, 'INSERT INTO neighbourhoods VALUES (?,?)')
 
 
-def insert_price_data(price_data: list):
-    insert_to_table(price_data, 'INSERT INTO price_data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)')
+def insert_ab_data(ab_data: list):
+    insert_to_table(ab_data, 'INSERT INTO ab_data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)')
 
 
 def insert_to_table(room_types, insert_command):

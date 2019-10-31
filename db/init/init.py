@@ -16,8 +16,8 @@ def create_neighbourhoods_table():
                      (id integer NOT NULL PRIMARY KEY, neighbourhood text)''')
 
 
-def create_price_data_table():
-    create_table('''CREATE TABLE IF NOT EXISTS price_data
+def create_ab_data_table():
+    create_table('''CREATE TABLE IF NOT EXISTS ab_data
                      (
                      name text,
                      host_id INTEGER NOT NULL,
@@ -51,4 +51,4 @@ def create_all_tables():
     create_room_types_table()
     create_neighbourhood_groups_table()
     create_neighbourhoods_table()
-    create_price_data_table()
+    create_ab_data_table()
