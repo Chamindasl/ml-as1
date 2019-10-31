@@ -5,6 +5,10 @@ def vertical_slice_data(data: list, index):
     return [item[index] for item in data]
 
 
+def vertical_slice_all_data(data: list):
+    return [list(i) for i in list(zip(*data))]
+
+
 def sort_data(data: tuple, index):
     return sorted(data, key=lambda x: x[index])
 
