@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 data_file = process_data_file()
 price_data = read.read_ab_data()
 
-plot(vertical_slice_all_data(price_data), F_ALL_VARIABLES)
+plot(vertical_slice_all_data(price_data), F_ALL_FIELDS)
 
 print(F_NUMBER_OF_REVIEWS)
 
