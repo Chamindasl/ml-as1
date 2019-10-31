@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 # sns.plt.show()
 
 data_file = process_data_file()
-price_data = read.read_price_data()
+price_data = read.read_ab_data()
 
 plot(vertical_slice_all_data(price_data), F_ALL_VARIABLES)
 
