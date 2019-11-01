@@ -3,7 +3,7 @@ import seaborn as sns; sns.set(color_codes=True)
 import sys
 
 
-def plot(data: list, indexes: list, use_seaborn=False):
+def scatter_plot(data: list, indexes: list, use_seaborn=False):
     tuple_len = len(indexes)
     use_seaborn_calculated = use_seaborn_cal(use_seaborn, tuple_len)
     fig, axes = plt.subplots(tuple_len, tuple_len, figsize=(tuple_len*4, tuple_len*4))
@@ -32,6 +32,23 @@ def plot(data: list, indexes: list, use_seaborn=False):
     plt.show()
 
 
+def dist_plot(data_list: list, titles: list, index: tuple):
+    tuple_len = len(data_list)
+    fig, axes = plt.subplots(tuple_len)
+    i = -1
+    for data in data_list:
+        i += 1
+        try:
+            axes[i].set_title([titles[i]])
+            sns.distplot(data[index[1]], color="b", ax=axes[i])
+            if i == tuple_len - 1:
+                axes[i].set_xlabel(index[0])
+        except:
+            print("Oops!", sys.exc_info()[0], "occured.")
+
+    plt.show()
+
+
 def set_axis_labels(axes, i, j, k, l, tuple_len):
     if j == 0:
         if tuple_len != 1:
@@ -44,6 +61,7 @@ def use_seaborn_cal(use_seaborn, tuple_len):
     if tuple_len == 1:
         return True
     return use_seaborn
+
 
 def get_axes(axes, i, j, tuple_len):
     if tuple_len == 1:
