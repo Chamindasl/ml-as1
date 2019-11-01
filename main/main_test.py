@@ -1,17 +1,9 @@
 from const import *
-from file.file_read import process_data_file
-from utils.data import vertical_slice_data
-from utils.data import vertical_slice_all_data
 from utils.data import sort_data
 from utils.data import group_by
-from utils.data import summary
-from db.read import read
-from analytics.multi_graph import scatter_plot
-from analytics.multi_graph import dist_plot
-from analytics.multi_graph import scatter_plot
-from const import F_PRICE, F_NUMERIC_FIELDS, F_ALL_FIELDS
-from db.write import write
-from db.init.init import create_all_tables
+from analytics.common.multi_graph import dist_plot
+from analytics.common.multi_graph import scatter_plot
+from const import F_PRICE, F_NUMERIC_FIELDS
 from db.read import read
 from file.file_read import process_data_file
 from utils.data import vertical_slice_all_data, summary, filter_by_index
@@ -54,7 +46,6 @@ dist_plot(
 a = (group_by(ab_data_p_lte_500, F_NEIGHBOURHOOD_GROUP_ID[1]))
 print(a)
 #scatter_plot(vertical_slice_ab_data_p_lt3_500, F_ALL_FIELDS, True)
-import matplotlib.pyplot as plt
 
 # library & dataset
 

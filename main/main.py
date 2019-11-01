@@ -1,5 +1,5 @@
-from analytics.multi_graph import dist_plot
-from analytics.multi_graph import scatter_plot
+from analytics.common.multi_graph import dist_plot
+from analytics.common.multi_graph import scatter_plot
 from const import F_PRICE, F_NUMERIC_FIELDS, F_ALL_FIELDS
 from db.write import write
 from db.init.init import create_all_tables
