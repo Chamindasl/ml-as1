@@ -6,7 +6,7 @@ from utils.data import sort_data
 from utils.data import group_by
 from utils.data import summary
 from db.read import read
-from analytics.multi_scatter import plot
+from analytics.multi_graph import scatter_plot
 
 import matplotlib.pyplot as plt
 
@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 data_file = process_data_file()
 price_data = read.read_ab_data()
 
-plot(vertical_slice_all_data(price_data), F_ALL_FIELDS)
+scatter_plot(vertical_slice_all_data(price_data), F_ALL_FIELDS)
 
 print(F_NUMBER_OF_REVIEWS)
 
