@@ -1,6 +1,6 @@
 from analytics.multi_graph import dist_plot
 from analytics.multi_graph import scatter_plot
-from const import F_PRICE, F_NUMERIC_FIELDS
+from const import F_PRICE, F_NUMERIC_FIELDS, F_ALL_FIELDS
 from db.write import write
 from db.init.init import create_all_tables
 from db.read import read
@@ -15,7 +15,8 @@ ab_data = read.read_ab_data()
 vertical_slice_all_data_list = vertical_slice_all_data(ab_data)
 
 print_summary(summary(ab_data, F_NUMERIC_FIELDS))
-# plot(vertical_slice_all_data_list(ab_data), F_ALL_VARIABLES)
+# scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS)
+# scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, True)
 
 print_summary(summary(ab_data, [F_PRICE]))
 scatter_plot(vertical_slice_all_data_list, [F_PRICE])
@@ -38,3 +39,5 @@ dist_plot(
     ],
     ["All Data", "Price <= 1000", "Price <= 500", "Price <= 300"],
     F_PRICE)
+
+scatter_plot(vertical_slice_ab_data_p_lt3_500, F_ALL_FIELDS, True)

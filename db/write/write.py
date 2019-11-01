@@ -1,7 +1,8 @@
 from db import connection, DATA_AB_NYC_DB
-import os.path
 from os import path
 import logging
+
+logger = logging.getLogger(__name__)
 
 
 def insert_all_data(all_data: dict):
@@ -11,7 +12,7 @@ def insert_all_data(all_data: dict):
         insert_neighbourhoods(all_data["neighbourhoods"])
         insert_ab_data(all_data["ab_data"])
     else:
-        logging.warning("Database file is already exist, data will not be inserted again")
+        logger.warning("Database file is already exist, data will not be inserted again")
 
 
 def insert_room_types(room_types: list):
