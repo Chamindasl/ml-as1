@@ -17,10 +17,9 @@ def sort_data(data: tuple, index):
 def group_by(data: list, index):
     groups = {}
     for i in data:
-        if i[index] in groups:
-            groups[i[index]].append(i)
-        else:
-            groups[i[index]] = list(i)
+        if not i[index] in groups:
+            groups[i[index]] = []
+        groups[i[index]].append(i)
     return groups
 
 
