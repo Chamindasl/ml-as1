@@ -1,11 +1,17 @@
-from db import connection
+from db import connection, DATA_AB_NYC_DB
+import os.path
+from os import path
+import logging
 
 
 def insert_all_data(all_data: dict):
-    insert_room_types(all_data["room_types"])
-    insert_neighbourhood_groups(all_data["neighbourhood_groups"])
-    insert_neighbourhoods(all_data["neighbourhoods"])
-    insert_ab_data(all_data["ab_data"])
+    if not path.exists(DATA_AB_NYC_DB):
+        insert_room_types(all_data["room_types"])
+        insert_neighbourhood_groups(all_data["neighbourhood_groups"])
+        insert_neighbourhoods(all_data["neighbourhoods"])
+        insert_ab_data(all_data["ab_data"])
+    else:
+        logging.warning("Database file is already exist, data will not be inserted again")
 
 
 def insert_room_types(room_types: list):
