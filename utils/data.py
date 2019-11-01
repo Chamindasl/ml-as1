@@ -1,4 +1,5 @@
 from utils.math import count_min_mean_median_mode_sd_max
+import operator
 
 
 def vertical_slice_data(data: list, index):
@@ -21,6 +22,15 @@ def group_by(data: list, index):
         else:
             groups[i[index]] = list(i)
     return groups
+
+
+def filter_by_index(data: list, index, op, value):
+    ops = {'>': operator.gt,
+           '<': operator.lt,
+           '>=': operator.ge,
+           '<=': operator.le,
+           '=': operator.eq}
+    return [i for i in data if ops[op](i[index[1]], value)]
 
 
 def summary(data: list, fields: list):

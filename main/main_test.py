@@ -30,7 +30,8 @@ print(F_NUMBER_OF_REVIEWS)
 sorted_by_reviews = sort_data(price_data,  F_PRICE[1])
 
 
-
+number_list = range(-5, 5)
+less_than_zero = list(filter(lambda x: x < 0, number_list))
 #plot(vertical_slice_all_data(sorted_by_reviews))
 #
 # num_of_reviews = vertical_slice_data(sorted_by_reviews, F_NUMBER_OF_REVIEWS[1])
