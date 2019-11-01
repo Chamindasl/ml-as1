@@ -7,10 +7,14 @@ from db.read import read
 from utils.data import vertical_slice_all_data, summary
 from utils.print import print_summary
 
-ab_data = process_data_file()
+ab_data_to_db = process_data_file()
 #create_all_tables()
 #write.insert_all_data(ab_data)
 ab_data = read.read_ab_data()
+vertical_slice_all_data = vertical_slice_all_data(ab_data)
 
-#plot(vertical_slice_all_data(ab_data), F_ALL_VARIABLES)
 print_summary(summary(ab_data, F_NUMERIC_FIELDS))
+#plot(vertical_slice_all_data(ab_data), F_ALL_VARIABLES)
+
+print_summary(summary(ab_data, [F_PRICE]))
+plot(vertical_slice_all_data, [F_PRICE])
