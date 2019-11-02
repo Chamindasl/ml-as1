@@ -57,15 +57,16 @@ def group_bar_plot(data: list):
     plt.show()
 
 
-def dist_plot(data_list: list, titles: list, index: tuple):
+def dist_plot(data_list: list, titles: list, means: list, index: tuple):
     tuple_len = len(data_list)
     fig, axes = plt.subplots(tuple_len, 2)
     i = -1
     for data in data_list:
         i += 1
         try:
-            axes[i][0].set_title([titles[i]])
-            axes[i][1].set_title([titles[i]])
+            axes[i][0].set_title("{0}, mean: {1:.2f}".format(titles[i], means[i]))
+            axes[i][0].axvline(means[i], color='r', linestyle='--')
+            axes[i][1].set_title(titles[i])
             sns.distplot(data[index[1]], color="b", ax=axes[i, 0])
             sns.violinplot(data[index[1]], color="b", ax=axes[i, 1])
             if i == tuple_len - 1:
