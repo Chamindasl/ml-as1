@@ -28,7 +28,6 @@ print(count_list)
 group_bar_plot(count_list)
 
 count_list = group_count_list(group_by(ab_data_p_lte_500, [F_ROOM_TYPE_ID[1]]))
-print(count_list)
 pie_plot(count_list)
 count_list.insert(1, [""])
 group_bar_plot(count_list)

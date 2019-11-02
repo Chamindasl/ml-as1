@@ -1,11 +1,12 @@
-from analytics.common.multi_graph import dist_plot
+from analytics.common.multi_graph import dist_plot, pie_plot, group_bar_plot
 from analytics.common.multi_graph import scatter_plot
-from const import F_PRICE, F_NUMERIC_FIELDS, F_ALL_FIELDS
+from const import F_PRICE, F_NUMERIC_FIELDS, F_ALL_FIELDS, F_ROOM_TYPE_ID, F_NEIGHBOURHOOD_GROUP_ID, F_NEIGHBOURHOOD_ID
 from db.write import write
 from db.init.init import create_all_tables
 from db.read import read
 from file.file_read import process_data_file
-from utils.data import vertical_slice_all_data, summary, filter_by_index
+from utils.data import vertical_slice_all_data, summary, filter_by_index, group_count_list, group_by, \
+    two_group_count_list
 from utils.print import print_summary
 
 ab_data_to_db = process_data_file()
@@ -40,4 +41,22 @@ dist_plot(
     ["All Data", "Price <= 1000", "Price <= 500", "Price <= 300"],
     F_PRICE)
 
-scatter_plot(vertical_slice_ab_data_p_lt3_500, F_ALL_FIELDS, True)
+# scatter_plot(vertical_slice_ab_data_p_lt3_500, F_ALL_FIELDS, True)
+
+group_count_list_by_room_type = group_count_list(group_by(ab_data_p_lte_500, [F_ROOM_TYPE_ID[1]]))
+group_count_list_by_neighbourhood_grp_id = group_count_list(group_by(ab_data_p_lte_500, [F_NEIGHBOURHOOD_GROUP_ID[1]]))
+
+pie_plot(group_count_list_by_room_type)
+pie_plot(group_count_list_by_neighbourhood_grp_id)
+
+group_count_list_by_room_type.insert(1, [""])
+group_bar_plot(group_count_list_by_room_type)
+
+group_count_list_by_neighbourhood_grp_id.insert(1, [""])
+group_bar_plot(group_count_list_by_neighbourhood_grp_id)
+
+group_count_list_by_room_type_and_neighbourhood_frp_id = two_group_count_list(group_by(ab_data_p_lte_500,
+                                                                                       [F_ROOM_TYPE_ID[1],
+                                                                                        F_NEIGHBOURHOOD_GROUP_ID[1]]))
+
+group_bar_plot(group_count_list_by_room_type_and_neighbourhood_frp_id)

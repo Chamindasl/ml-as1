@@ -49,11 +49,9 @@ def group_bar_plot(data: list):
     legends = data[1]
     for i in range(len(legends)):
         x_pos = [j * (len(legends) + 1) + i for j in range(len(labels))]
-        print(x_pos)
         plt.bar(x_pos, data[i + 2], width=1)
     x_pos_leb = [(len(legends) * (len(legends) + 1) * j + sum(range(len(legends)))) / len(legends) for j in
                  range(len(labels))]
-    print(x_pos_leb)
     plt.xticks(x_pos_leb, labels)
     plt.legend(legends)
     plt.show()
@@ -77,18 +75,14 @@ def dist_plot(data_list: list, titles: list, index: tuple):
 
 
 def pie_plot(data: list):
-
-    # Pie chart, where the slices will be ordered and plotted counter-clockwise:
     labels = data[0]
     data_list = data[1]
     sum_all = sum(data_list)
     sizes = [i * 100.0 / sum_all for i in data_list]
-
     fig1, ax1 = plt.subplots()
     ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
             shadow=True, startangle=90)
     ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-
     plt.show()
 
 
