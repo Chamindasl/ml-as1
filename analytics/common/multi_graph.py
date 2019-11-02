@@ -76,6 +76,22 @@ def dist_plot(data_list: list, titles: list, index: tuple):
     plt.show()
 
 
+def pie_plot(data: list):
+
+    # Pie chart, where the slices will be ordered and plotted counter-clockwise:
+    labels = data[0]
+    data_list = data[1]
+    sum_all = sum(data_list)
+    sizes = [i * 100.0 / sum_all for i in data_list]
+
+    fig1, ax1 = plt.subplots()
+    ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
+            shadow=True, startangle=90)
+    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+    plt.show()
+
+
 def set_axis_labels(axes, i, j, k, l, tuple_len):
     if tuple_len != 1:
         get_axes(axes, i, j, tuple_len).set_ylabel(k[0])
