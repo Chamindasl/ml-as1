@@ -59,18 +59,21 @@ def group_bar_plot(data: list):
 
 def dist_plot(data_list: list, titles: list, index: tuple):
     tuple_len = len(data_list)
-    fig, axes = plt.subplots(tuple_len)
+    fig, axes = plt.subplots(tuple_len, 2)
     i = -1
     for data in data_list:
         i += 1
         try:
-            axes[i].set_title([titles[i]])
-            sns.distplot(data[index[1]], color="b", ax=axes[i])
+            axes[i][0].set_title([titles[i]])
+            axes[i][1].set_title([titles[i]])
+            sns.distplot(data[index[1]], color="b", ax=axes[i, 0])
+            sns.violinplot(data[index[1]], color="b", ax=axes[i, 1])
             if i == tuple_len - 1:
-                axes[i].set_xlabel(index[0])
+                axes[i][0].set_xlabel(index[0])
+                axes[i][1].set_xlabel(index[0])
+
         except:
             print("Oops!", sys.exc_info()[0], "occured.")
-
     plt.show()
 
 
