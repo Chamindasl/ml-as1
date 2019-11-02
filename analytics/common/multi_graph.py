@@ -1,7 +1,9 @@
 import matplotlib.pyplot as plt
-import seaborn as sns; sns.set(color_codes=True)
-import sys
+import seaborn as sns;
 import logging
+import sys
+
+sns.set(color_codes=True)
 
 logger = logging.getLogger(__name__)
 
@@ -10,9 +12,9 @@ def scatter_plot(data: list, indexes: list, use_seaborn=False):
     tuple_len = len(indexes)
     if tuple_len > 1:
         logger.warning("Generating pair %s scatter plots for %s variables, this could take minutes",
-                       tuple_len*tuple_len, tuple_len)
+                       tuple_len * tuple_len, tuple_len)
     use_seaborn_calculated = use_seaborn_cal(use_seaborn, tuple_len)
-    fig, axes = plt.subplots(tuple_len, tuple_len, figsize=(tuple_len*4, tuple_len*4))
+    fig, axes = plt.subplots(tuple_len, tuple_len, figsize=(tuple_len * 4, tuple_len * 4))
     i = -1
     j = -1
     for k in indexes:
@@ -40,6 +42,21 @@ def plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_seaborn_calcula
                 get_axes(axes, i, j, tuple_len).hist(data[l[1]])
     except:
         print("Oops!", sys.exc_info()[0], "occured.")
+
+
+def group_bar_plot(data: list):
+    labels = data[0]
+    legends = data[1]
+    for i in range(len(legends)):
+        x_pos = [j * (len(legends) + 1) + i for j in range(len(labels))]
+        print(x_pos)
+        plt.bar(x_pos, data[i + 2], width=1)
+    x_pos_leb = [(len(legends) * (len(legends) + 1) * j + sum(range(len(legends)))) / len(legends) for j in
+                 range(len(labels))]
+    print(x_pos_leb)
+    plt.xticks(x_pos_leb, labels)
+    plt.legend(legends)
+    plt.show()
 
 
 def dist_plot(data_list: list, titles: list, index: tuple):
