@@ -43,7 +43,7 @@ dist_plot(
     F_PRICE)
 
 
-a = (group_by(ab_data_p_lte_500, F_NEIGHBOURHOOD_GROUP_ID[1]))
+a = (group_by(ab_data_p_lte_500, [F_ROOM_TYPE_ID[1], F_NEIGHBOURHOOD_GROUP_ID[1]]))
 print(a)
 #scatter_plot(vertical_slice_ab_data_p_lt3_500, F_ALL_FIELDS, True)
 

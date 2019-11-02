@@ -14,13 +14,41 @@ def sort_data(data: tuple, index):
     return sorted(data, key=lambda x: x[index])
 
 
-def group_by(data: list, index):
+def group_by(data: list, indexes):
     groups = {}
     for i in data:
-        if not i[index] in groups:
-            groups[i[index]] = []
-        groups[i[index]].append(i)
-    return groups
+        key = []
+        for j in indexes:
+            key.append(i[j])
+        key_tuple = tuple(key)
+        if key_tuple not in groups:
+            groups[key_tuple] = []
+        groups[key_tuple].append(i)
+    return {i: groups[i] for i in sorted(groups.keys())}
+
+
+def two_group_count_list(data: dict):
+    g1 = set(k for k, v in data.keys())
+    g2 = set(v for k, v in data.keys())
+    k = 0
+    ll = 0
+    result = []
+    sorted1 = sorted(g1)
+    sorted2 = sorted(g2)
+    for i in sorted1:
+        result.append([])
+        for j in sorted2:
+            result[k].append([])
+            if (sorted1[k], sorted2[ll]) in data:
+                result[k][ll] = len(data[(sorted1[k], sorted2[ll])])
+            else:
+                result[k][ll] = 0
+            ll += 1
+        ll = 0
+        k += 1
+    result.insert(0, sorted1)
+    result.insert(1, sorted2)
+    return result
 
 
 def filter_by_index(data: list, index, op, value):
