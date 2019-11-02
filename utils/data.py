@@ -27,27 +27,40 @@ def group_by(data: list, indexes):
     return {i: groups[i] for i in sorted(groups.keys())}
 
 
+def group_count_list(data: dict):
+    g1 = set(k for k in data.keys())
+    k = 0
+    result = []
+    sorted1 = sorted(g1)
+    result.append([])
+    for i in sorted1:
+        if (sorted1[k]) in data:
+            result[0].append(len(data[(sorted1[k])]))
+        else:
+            result[0].append(0)
+        k += 1
+    result.insert(0, sorted1)
+    return result
+
+
 def two_group_count_list(data: dict):
-    g1 = set(k for k, v in data.keys())
-    g2 = set(v for k, v in data.keys())
+    sorted_group_1 = sorted(set(k for k, v in data.keys()))
+    sorted_group_2 = sorted(set(v for k, v in data.keys()))
     k = 0
     ll = 0
     result = []
-    sorted1 = sorted(g1)
-    sorted2 = sorted(g2)
-    for i in sorted1:
+    for i in sorted_group_2:
         result.append([])
-        for j in sorted2:
-            result[k].append([])
-            if (sorted1[k], sorted2[ll]) in data:
-                result[k][ll] = len(data[(sorted1[k], sorted2[ll])])
-            else:
-                result[k][ll] = 0
-            ll += 1
-        ll = 0
-        k += 1
-    result.insert(0, sorted1)
-    result.insert(1, sorted2)
+        for j in sorted_group_1:
+            result[ll].append([])
+            result[ll][k] = 0
+            if (sorted_group_1[k], sorted_group_2[ll]) in data:
+                result[ll][k] = len(data[(sorted_group_1[k], sorted_group_2[ll])])
+            k += 1
+        k = 0
+        ll += 1
+    result.insert(0, sorted_group_1)
+    result.insert(1, sorted_group_2)
     return result
 
 
