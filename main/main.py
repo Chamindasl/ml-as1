@@ -55,8 +55,12 @@ group_bar_plot(group_count_list_by_room_type)
 group_count_list_by_neighbourhood_grp_id.insert(1, [""])
 group_bar_plot(group_count_list_by_neighbourhood_grp_id)
 
-group_count_list_by_room_type_and_neighbourhood_frp_id = two_group_count_list(group_by(ab_data_p_lte_500,
+group_count_list_by_room_type_and_neighbourhood_grp_id = two_group_count_list(group_by(ab_data_p_lte_500,
                                                                                        [F_ROOM_TYPE_ID[1],
                                                                                         F_NEIGHBOURHOOD_GROUP_ID[1]]))
+group_bar_plot(group_count_list_by_room_type_and_neighbourhood_grp_id)
 
-group_bar_plot(group_count_list_by_room_type_and_neighbourhood_frp_id)
+group_count_list_by__neighbourhood_grp_id_and_room_type = two_group_count_list(group_by(ab_data_p_lte_500,
+                                                                                        [F_NEIGHBOURHOOD_GROUP_ID[1],
+                                                                                         F_ROOM_TYPE_ID[1]]))
+group_bar_plot(group_count_list_by__neighbourhood_grp_id_and_room_type)
