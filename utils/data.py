@@ -20,7 +20,10 @@ def group_by(data: list, indexes):
         key = []
         for j in indexes:
             key.append(i[j])
-        key_tuple = tuple(key)
+        if len(key) > 1:
+            key_tuple = tuple(key)
+        else:
+            key_tuple = key[0]
         if key_tuple not in groups:
             groups[key_tuple] = []
         groups[key_tuple].append(i)
