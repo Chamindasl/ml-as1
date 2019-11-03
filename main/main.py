@@ -24,22 +24,22 @@ print_summary(price_summary_all_data)
 scatter_plot(vertical_slice_all_data_list, [F_PRICE])
 
 ab_data_p_lte_1000 = filter_by_index(ab_data, F_PRICE, '<=', 1000)
-vertical_slice_ab_data_p_lt3_1000 = vertical_slice_all_data(ab_data_p_lte_1000)
+vertical_slice_ab_data_p_lte_1000 = vertical_slice_all_data(ab_data_p_lte_1000)
 price_summary_lte_1000 = summary(ab_data_p_lte_1000, [F_PRICE])
 print_summary(price_summary_lte_1000)
-scatter_plot(vertical_slice_ab_data_p_lt3_1000, [F_PRICE])
+scatter_plot(vertical_slice_ab_data_p_lte_1000, [F_PRICE])
 
 ab_data_p_lte_500 = filter_by_index(ab_data_p_lte_1000, F_PRICE, '<=', 500)
-vertical_slice_ab_data_p_lt3_500 = vertical_slice_all_data(ab_data_p_lte_500)
+vertical_slice_ab_data_p_lte_500 = vertical_slice_all_data(ab_data_p_lte_500)
 price_summary_lte_500 = summary(ab_data_p_lte_500, [F_PRICE])
 print_summary(price_summary_lte_500)
-scatter_plot(vertical_slice_ab_data_p_lt3_500, [F_PRICE])
+scatter_plot(vertical_slice_ab_data_p_lte_500, [F_PRICE])
 
 dist_plot(
     [
         vertical_slice_all_data_list,
-        vertical_slice_ab_data_p_lt3_1000,
-        vertical_slice_ab_data_p_lt3_500,
+        vertical_slice_ab_data_p_lte_1000,
+        vertical_slice_ab_data_p_lte_500,
     ],
     ["All Data", "Price <= 1000", "Price <= 500"],
     [
@@ -49,7 +49,7 @@ dist_plot(
     ],
     F_PRICE)
 
-# scatter_plot(vertical_slice_ab_data_p_lt3_500, F_ALL_FIELDS, True)
+# scatter_plot(vertical_slice_ab_data_p_lte_500, F_ALL_FIELDS, True)
 
 group_by_room_type = group_by(ab_data_p_lte_500, [F_ROOM_TYPE_ID[1]])
 group_count_list_by_room_type = group_count_list(group_by_room_type)
@@ -96,12 +96,14 @@ scatter_plot(vertical_slice_ab_data_p_gt_5000, [F_PRICE])
 dist_plot(
     [
         vertical_slice_all_data_list,
+        vertical_slice_ab_data_p_lte_1000,
         vertical_slice_ab_data_p_gt_1000,
         vertical_slice_ab_data_p_gt_5000,
     ],
-    ["All Data", "Price > 1000", "Price > 5000"],
+    ["All Data", "Price < 1000", "Price > 1000", "Price > 5000"],
     [
         price_summary_all_data[0][1]["mean"],
+        price_summary_lte_1000[0][1]["mean"],
         price_summary_gte_1000[0][1]["mean"],
         price_summary_gte_5000[0][1]["mean"],
     ],
