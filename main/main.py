@@ -51,34 +51,38 @@ dist_plot(
 
 # scatter_plot(vertical_slice_ab_data_p_lte_500, F_ALL_FIELDS, True)
 
-group_by_room_type = group_by(ab_data_p_lte_500, [F_ROOM_TYPE_ID[1]])
-group_count_list_by_room_type = group_count_list(group_by_room_type)
-group_by_neighbourhood_grp = group_by(ab_data_p_lte_500, [F_NEIGHBOURHOOD_GROUP_ID[1]])
-group_count_list_by_neighbourhood_grp_id = group_count_list(group_by_neighbourhood_grp)
+group_by_room_type_lt_1000 = group_by(ab_data_p_lte_500, [F_ROOM_TYPE_ID[1]])
+group_count_list_by_room_type_lt_1000 = group_count_list(group_by_room_type_lt_1000)
+group_by_neighbourhood_grp_lt_1000 = group_by(ab_data_p_lte_500, [F_NEIGHBOURHOOD_GROUP_ID[1]])
+group_count_list_by_neighbourhood_grp_id_lt_1000 = group_count_list(group_by_neighbourhood_grp_lt_1000)
 
-pie_plot(group_count_list_by_room_type)
-pie_plot(group_count_list_by_neighbourhood_grp_id)
+pie_plot(group_count_list_by_room_type_lt_1000)
+pie_plot(group_count_list_by_neighbourhood_grp_id_lt_1000)
 
-group_count_list_by_room_type.insert(1, [""])
-group_bar_plot(group_count_list_by_room_type)
+group_count_list_by_room_type_lt_1000.insert(1, [""])
+group_bar_plot(group_count_list_by_room_type_lt_1000)
 
-group_count_list_by_neighbourhood_grp_id.insert(1, [""])
-group_bar_plot(group_count_list_by_neighbourhood_grp_id)
+group_count_list_by_neighbourhood_grp_id_lt_1000.insert(1, [""])
+group_bar_plot(group_count_list_by_neighbourhood_grp_id_lt_1000)
 
-group_count_list_by_room_type_and_neighbourhood_grp_id = two_group_count_list(group_by(ab_data_p_lte_500,
-                                                                                       [F_ROOM_TYPE_ID[1],
-                                                                                        F_NEIGHBOURHOOD_GROUP_ID[1]]))
-group_bar_plot(group_count_list_by_room_type_and_neighbourhood_grp_id)
+group_count_list_by_room_type_and_neighbourhood_grp_id_lt_1000 = two_group_count_list \
+    (group_by(ab_data_p_lte_500,
+              [F_ROOM_TYPE_ID[1],
+               F_NEIGHBOURHOOD_GROUP_ID[1]]))
+group_bar_plot(group_count_list_by_room_type_and_neighbourhood_grp_id_lt_1000)
 
-group_count_list_by__neighbourhood_grp_id_and_room_type = two_group_count_list(group_by(ab_data_p_lte_500,
-                                                                                        [F_NEIGHBOURHOOD_GROUP_ID[1],
-                                                                                         F_ROOM_TYPE_ID[1]]))
+group_count_list_by_neighbourhood_grp_id_and_room_type_lt_1000 = two_group_count_list(
+    group_by(ab_data_p_lte_500,
+             [F_NEIGHBOURHOOD_GROUP_ID[1],
+              F_ROOM_TYPE_ID[1]]))
 
-price_group_by_room_type = {k: vertical_slice_data(v, F_PRICE[1]) for k, v in group_by_room_type.items()}
-violin_plot(price_group_by_room_type)
+price_group_by_room_type_lt_1000 = {k: vertical_slice_data(v, F_PRICE[1]) for k, v in
+                                    group_by_room_type_lt_1000.items()}
+violin_plot(price_group_by_room_type_lt_1000)
 
-price_group_by_neighbourhood_grp_id = {k: vertical_slice_data(v, F_PRICE[1]) for k, v in group_by_neighbourhood_grp.items()}
-violin_plot(price_group_by_neighbourhood_grp_id)
+price_group_by_neighbourhood_grp_id_lt_1000 = {k: vertical_slice_data(v, F_PRICE[1]) for k, v in
+                                               group_by_neighbourhood_grp_lt_1000.items()}
+violin_plot(price_group_by_neighbourhood_grp_id_lt_1000)
 
 ''''''
 ab_data_p_gte_1000 = filter_by_index(ab_data, F_PRICE, '>', 1000)
@@ -111,32 +115,35 @@ dist_plot(
 
 # scatter_plot(vertical_slice_ab_data_p_gt_1000, F_ALL_FIELDS, True)
 
-group_by_room_type = group_by(ab_data_p_gte_1000, [F_ROOM_TYPE_ID[1]])
-group_count_list_by_room_type = group_count_list(group_by_room_type)
-group_by_neighbourhood_grp = group_by(ab_data_p_gte_1000, [F_NEIGHBOURHOOD_GROUP_ID[1]])
-group_count_list_by_neighbourhood_grp_id = group_count_list(group_by_neighbourhood_grp)
+group_by_room_type_gt_1000 = group_by(ab_data_p_gte_1000, [F_ROOM_TYPE_ID[1]])
+group_count_list_by_room_type_gt_1000 = group_count_list(group_by_room_type_gt_1000)
+group_by_neighbourhood_grp_gt_1000 = group_by(ab_data_p_gte_1000, [F_NEIGHBOURHOOD_GROUP_ID[1]])
+group_count_list_by_neighbourhood_grp_id_gt_1000 = group_count_list(group_by_neighbourhood_grp_gt_1000)
 
-pie_plot(group_count_list_by_room_type)
-pie_plot(group_count_list_by_neighbourhood_grp_id)
+pie_plot(group_count_list_by_room_type_gt_1000)
+pie_plot(group_count_list_by_neighbourhood_grp_id_gt_1000)
 
-group_count_list_by_room_type.insert(1, [""])
-group_bar_plot(group_count_list_by_room_type)
+group_count_list_by_room_type_gt_1000.insert(1, [""])
+group_bar_plot(group_count_list_by_room_type_gt_1000)
 
-group_count_list_by_neighbourhood_grp_id.insert(1, [""])
-group_bar_plot(group_count_list_by_neighbourhood_grp_id)
+group_count_list_by_neighbourhood_grp_id_gt_1000.insert(1, [""])
+group_bar_plot(group_count_list_by_neighbourhood_grp_id_gt_1000)
 
-group_count_list_by_room_type_and_neighbourhood_grp_id = two_group_count_list(group_by(ab_data_p_gte_1000,
-                                                                                       [F_ROOM_TYPE_ID[1],
-                                                                                        F_NEIGHBOURHOOD_GROUP_ID[1]]))
-group_bar_plot(group_count_list_by_room_type_and_neighbourhood_grp_id)
+group_count_list_by_room_type_and_neighbourhood_grp_id_gt_1000 = two_group_count_list(
+    group_by(ab_data_p_gte_1000,
+             [F_ROOM_TYPE_ID[1],
+              F_NEIGHBOURHOOD_GROUP_ID[1]]))
+group_bar_plot(group_count_list_by_room_type_and_neighbourhood_grp_id_gt_1000)
 
-group_count_list_by__neighbourhood_grp_id_and_room_type = two_group_count_list(group_by(ab_data_p_gte_1000,
-                                                                                        [F_NEIGHBOURHOOD_GROUP_ID[1],
-                                                                                         F_ROOM_TYPE_ID[1]]))
+group_count_list_by_neighbourhood_grp_id_and_room_type_gt_1000 = two_group_count_list(
+    group_by(ab_data_p_gte_1000,
+             [F_NEIGHBOURHOOD_GROUP_ID[1],
+              F_ROOM_TYPE_ID[1]]))
 
-price_group_by_room_type = {k: vertical_slice_data(v, F_PRICE[1]) for k, v in group_by_room_type.items()}
-violin_plot(price_group_by_room_type)
+price_group_by_room_type_gt_1000 = {k: vertical_slice_data(v, F_PRICE[1]) for k, v in
+                                    group_by_room_type_gt_1000.items()}
+violin_plot(price_group_by_room_type_gt_1000)
 
-price_group_by_neighbourhood_grp_id = {k: vertical_slice_data(v, F_PRICE[1])
-                                       for k, v in group_by_neighbourhood_grp.items()}
-violin_plot(price_group_by_neighbourhood_grp_id)
+price_group_by_neighbourhood_grp_id_gt_1000 = {k: vertical_slice_data(v, F_PRICE[1])
+                                               for k, v in group_by_neighbourhood_grp_gt_1000.items()}
+violin_plot(price_group_by_neighbourhood_grp_id_gt_1000)
