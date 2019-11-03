@@ -15,6 +15,7 @@ def scatter_plot(data: list, indexes: list, use_seaborn=False, title=None):
                        tuple_len * tuple_len, tuple_len)
     use_seaborn_calculated = use_seaborn_cal(use_seaborn, tuple_len)
     fig, axes = plt.subplots(tuple_len, tuple_len, figsize=(tuple_len * 4, tuple_len * 4))
+    fig.suptitle(title, color='r')
     i = -1
     j = -1
     for k in indexes:
@@ -24,7 +25,6 @@ def scatter_plot(data: list, indexes: list, use_seaborn=False, title=None):
             plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_seaborn_calculated)
         j = -1
 
-    fig.suptitle(title)
     plt.show()
 
 
@@ -55,12 +55,14 @@ def group_bar_plot(data: list, title=None):
                  range(len(labels))]
     plt.xticks(x_pos_leb, labels)
     plt.legend(legends)
+    plt.title(title)
     plt.show()
 
 
 def dist_plot(data_list: list, titles: list, means: list, index: tuple, title=None):
     tuple_len = len(data_list)
     fig, axes = plt.subplots(tuple_len, 2)
+    fig.suptitle(title, color='r')
     i = -1
     for data in data_list:
         i += 1
@@ -81,6 +83,7 @@ def dist_plot(data_list: list, titles: list, means: list, index: tuple, title=No
 
 def violin_plot(data_dict: dict, title=None):
     fig, axes = plt.subplots(1)
+    fig.suptitle(title, color='r')
     g = sns.violinplot(data=list(data_dict.values()), ax=axes)
     g.set_xticklabels(list(data_dict.keys()))
     plt.show()
@@ -91,10 +94,11 @@ def pie_plot(data: list, title=None):
     data_list = data[1]
     sum_all = sum(data_list)
     sizes = [i * 100.0 / sum_all for i in data_list]
-    fig1, ax1 = plt.subplots()
-    ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
-            shadow=True, startangle=90)
-    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    fig, ax = plt.subplots()
+    fig.suptitle(title, color='r')
+    ax.pie(sizes, labels=labels, autopct='%1.1f%%',
+           shadow=True, startangle=90)
+    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
     plt.show()
 
 
