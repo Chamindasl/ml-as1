@@ -41,7 +41,7 @@ def plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_seaborn_calcula
             else:
                 get_axes(axes, i, j, tuple_len).hist(data[l[1]])
     except:
-        print("Oops!", sys.exc_info()[0], "occured.")
+        print()
 
 
 def group_bar_plot(data: list):
@@ -74,7 +74,7 @@ def dist_plot(data_list: list, titles: list, means: list, index: tuple):
                 axes[i][1].set_xlabel(index[0])
 
         except:
-            print("Oops!", sys.exc_info()[0], "occured.")
+            print()
     plt.show()
 
 
