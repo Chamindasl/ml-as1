@@ -1,14 +1,14 @@
+import logging
+
 import matplotlib.pyplot as plt
 import seaborn as sns;
-import logging
-import sys
 
 sns.set(color_codes=True)
 
 logger = logging.getLogger(__name__)
 
 
-def scatter_plot(data: list, indexes: list, use_seaborn=False):
+def scatter_plot(data: list, indexes: list, use_seaborn=False, title=None):
     tuple_len = len(indexes)
     if tuple_len > 1:
         logger.warning("Generating pair %s scatter plots for %s variables, this could take minutes",
@@ -24,6 +24,7 @@ def scatter_plot(data: list, indexes: list, use_seaborn=False):
             plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_seaborn_calculated)
         j = -1
 
+    fig.suptitle(title)
     plt.show()
 
 
@@ -44,7 +45,7 @@ def plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_seaborn_calcula
         print()
 
 
-def group_bar_plot(data: list):
+def group_bar_plot(data: list, title=None):
     labels = data[0]
     legends = data[1]
     for i in range(len(legends)):
@@ -57,7 +58,7 @@ def group_bar_plot(data: list):
     plt.show()
 
 
-def dist_plot(data_list: list, titles: list, means: list, index: tuple):
+def dist_plot(data_list: list, titles: list, means: list, index: tuple, title=None):
     tuple_len = len(data_list)
     fig, axes = plt.subplots(tuple_len, 2)
     i = -1
@@ -78,14 +79,14 @@ def dist_plot(data_list: list, titles: list, means: list, index: tuple):
     plt.show()
 
 
-def violin_plot(data_dict: dict):
+def violin_plot(data_dict: dict, title=None):
     fig, axes = plt.subplots(1)
     g = sns.violinplot(data=list(data_dict.values()), ax=axes)
     g.set_xticklabels(list(data_dict.keys()))
     plt.show()
 
 
-def pie_plot(data: list):
+def pie_plot(data: list, title=None):
     labels = data[0]
     data_list = data[1]
     sum_all = sum(data_list)
