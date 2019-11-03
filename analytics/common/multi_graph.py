@@ -78,6 +78,13 @@ def dist_plot(data_list: list, titles: list, means: list, index: tuple):
     plt.show()
 
 
+def violin_plot(data_dict: dict):
+    fig, axes = plt.subplots(1)
+    g = sns.violinplot(data=list(data_dict.values()), ax=axes)
+    g.set_xticklabels(list(data_dict.keys()))
+    plt.show()
+
+
 def pie_plot(data: list):
     labels = data[0]
     data_list = data[1]
