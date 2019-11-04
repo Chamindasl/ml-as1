@@ -16,8 +16,8 @@ ab_data = read.read_ab_data()
 vertical_slice_all_data_list = vertical_slice_all_data(ab_data)
 
 print_summary(summary(ab_data, F_NUMERIC_FIELDS))
-scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, title="Pair Scatter Plot for All Variables")
-scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, True, title="Pair Scatter Plot for All Variables")
+# scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, title="Pair Scatter Plot for All Variables")
+# scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, True, title="Pair Scatter Plot for All Variables")
 
 price_summary_all_data = summary(ab_data, [F_PRICE])
 print_summary(price_summary_all_data)

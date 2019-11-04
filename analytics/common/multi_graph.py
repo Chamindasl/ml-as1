@@ -1,5 +1,6 @@
+from datetime import datetime
 import logging
-
+import re
 import matplotlib.pyplot as plt
 import seaborn as sns;
 
@@ -24,8 +25,10 @@ def scatter_plot(data: list, indexes: list, use_seaborn=False, title=None):
             j += 1
             plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_seaborn_calculated)
         j = -1
-
-    plt.show()
+    png = "../analytics/graphs/%s___%s.png" % (re.sub('[^a-zA-Z0-9\n\.]', '_', title), datetime.now().strftime(
+        '%Y_%m_%d_%H_%M_%S'))
+    fig.savefig(png.lower())
+    # plt.show()
 
 
 def plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_seaborn_calculated):
@@ -56,6 +59,9 @@ def group_bar_plot(data: list, title=None):
     plt.xticks(x_pos_leb, labels)
     plt.legend(legends)
     plt.title(title)
+    png = "../analytics/graphs/%s___%s.png" % (re.sub('[^a-zA-Z0-9\n\.]', '_', title), datetime.now().strftime(
+        '%Y_%m_%d_%H_%M_%S'))
+    plt.figure().savefig(png.lower())
     plt.show()
 
 
@@ -78,6 +84,9 @@ def dist_plot(data_list: list, titles: list, means: list, index: tuple, title=No
 
         except:
             print()
+    png = "../analytics/graphs/%s___%s.png" % (re.sub('[^a-zA-Z0-9\n\.]', '_', title), datetime.now().strftime(
+        '%Y_%m_%d_%H_%M_%S'))
+    fig.savefig(png.lower())
     plt.show()
 
 
@@ -86,6 +95,9 @@ def violin_plot(data_dict: dict, title=None):
     fig.suptitle(title, color='r')
     g = sns.violinplot(data=list(data_dict.values()), ax=axes)
     g.set_xticklabels(list(data_dict.keys()))
+    png = "../analytics/graphs/%s___%s.png" % (re.sub('[^a-zA-Z0-9\n\.]', '_', title), datetime.now().strftime(
+        '%Y_%m_%d_%H_%M_%S'))
+    fig.savefig(png.lower())
     plt.show()
 
 
@@ -99,6 +111,9 @@ def pie_plot(data: list, title=None):
     ax.pie(sizes, labels=labels, autopct='%1.1f%%',
            shadow=True, startangle=90)
     ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    png = "../analytics/graphs/%s___%s.png" % (re.sub('[^a-zA-Z0-9\n\.]', '_', title), datetime.now().strftime(
+        '%Y_%m_%d_%H_%M_%S'))
+    fig.savefig(png.lower())
     plt.show()
 
 
