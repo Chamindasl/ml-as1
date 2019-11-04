@@ -3,6 +3,22 @@ import operator
 
 
 def vertical_slice_data(data: list, index):
+    """
+    Can be used to indexed data as a list from list of tuple or list of list.
+    Examples:
+         >>> print([i for i in vertical_slice_data([
+         (1, "A", 1.1),
+         (2, "B", 2.2),
+         (3, "C", 3.3)], 1)])
+        ["A", "B", "C"]
+    :param data: as list of tuple or list of list
+    :param index: index of tuple
+    :return: index data of all tuple as list
+    Raises:
+        IndexError: When index is out of.
+        TypeError: When index is not integer.
+    .. seealso:: vertical_slice_all_data
+    """
     return [item[index] for item in data]
 
 
