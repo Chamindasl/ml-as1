@@ -1,28 +1,50 @@
-from utils.math import count_min_mean_median_mode_sd_max
 import operator
+
+from utils.math import count_min_mean_median_mode_sd_max
 
 
 def vertical_slice_data(data: list, index):
     """
-    Can be used to indexed data as a list from list of tuple or list of list.
+    Can be used to slice vertically indexed data as a list from list of tuple or list of list.
+
     Examples:
          >>> print([i for i in vertical_slice_data([
          (1, "A", 1.1),
          (2, "B", 2.2),
          (3, "C", 3.3)], 1)])
-        ["A", "B", "C"]
+         ["A", "B", "C"]
     :param data: as list of tuple or list of list
     :param index: index of tuple
     :return: index data of all tuple as list
+
     Raises:
         IndexError: When index is out of.
         TypeError: When index is not integer.
-    .. seealso:: vertical_slice_all_data
+
+    .. seealso:: ``vertical_slice_all_data``
     """
     return [item[index] for item in data]
 
 
 def vertical_slice_all_data(data: list):
+    """
+    Can be used to slice vertically all indexed data as a list from list of tuple or list of list.
+
+    Examples:
+         >>> print([i for i in vertical_slice_data([
+         (1, "A", 1.1),
+         (2, "B", 2.2),
+         (3, "C", 3.3)])])
+         [[1, 2, 3], ["A", "B", "C"], [1.1, 2,2, 3.3]]
+    :param data: as list of tuple or list of list
+    :return: all index data of all tuple as list
+
+    Raises:
+        IndexError: When index is out of.
+        TypeError: When index is not integer.
+
+    .. seealso:: ``vertical_slice_data``
+    """
     return [list(i) for i in list(zip(*data))]
 
 

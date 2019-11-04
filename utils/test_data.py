@@ -1,12 +1,11 @@
 from unittest import TestCase
 
-from utils.data import group_count_list
+from utils.data import group_count_list, vertical_slice_all_data, vertical_slice_data
 
 
 class TestData(TestCase):
 
     def test_vertical_slice_data(self):
-        from utils.data import vertical_slice_data
         data = [(1, "A", 1.1), (2, "B", 2.2), (3, "C", 3.3)]
         expected_array = [[1, 2, 3], ["A", "B", "C"], [1.1, 2.2, 3.3]]
         for i in range(3):
@@ -14,10 +13,15 @@ class TestData(TestCase):
             self.assertEqual(expected_array[i], actual)
 
     def test_vertical_slice_data_wrong_index(self):
-        from utils.data import vertical_slice_data
         data = [(1, "A", 1.1), (2, "B", 2.2), (3, "C", 3.3)]
         self.assertRaises(IndexError, vertical_slice_data, data, 4)
         self.assertRaises(TypeError, vertical_slice_data, data, "A")
+
+    def test_vertical_slice_all_data(self):
+        data = [(1, "A", 1.1), (2, "B", 2.2), (3, "C", 3.3)]
+        expected_array = [[1, 2, 3], ["A", "B", "C"], [1.1, 2.2, 3.3]]
+        actual = vertical_slice_all_data(data)
+        self.assertEqual(expected_array, actual)
 
     def test_two_group_count_list(self):
         from utils.data import two_group_count_list
