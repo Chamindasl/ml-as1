@@ -27,8 +27,8 @@ def scatter_plot(data: list, indexes: list, use_seaborn=False, title=None):
         j = -1
     png = "../analytics/graphs/%s___%s.png" % (re.sub('[^a-zA-Z0-9\n\.]', '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
-    fig.savefig(png.lower())
-    # plt.show()
+    fig.savefig(png.lower(),  dpi=fig.dpi)
+    plt.show()
 
 
 def plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_seaborn_calculated):
@@ -61,7 +61,7 @@ def group_bar_plot(data: list, title=None):
     plt.title(title)
     png = "../analytics/graphs/%s___%s.png" % (re.sub('[^a-zA-Z0-9\n\.]', '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
-    plt.figure().savefig(png.lower())
+    plt.savefig(png.lower())
     plt.show()
 
 
@@ -86,7 +86,7 @@ def dist_plot(data_list: list, titles: list, means: list, index: tuple, title=No
             print()
     png = "../analytics/graphs/%s___%s.png" % (re.sub('[^a-zA-Z0-9\n\.]', '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
-    fig.savefig(png.lower())
+    fig.savefig(png.lower(), dpi=fig.dpi)
     plt.show()
 
 
@@ -97,7 +97,7 @@ def violin_plot(data_dict: dict, title=None):
     g.set_xticklabels(list(data_dict.keys()))
     png = "../analytics/graphs/%s___%s.png" % (re.sub('[^a-zA-Z0-9\n\.]', '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
-    fig.savefig(png.lower())
+    fig.savefig(png.lower(),  dpi=fig.dpi)
     plt.show()
 
 
@@ -113,7 +113,7 @@ def pie_plot(data: list, title=None):
     ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
     png = "../analytics/graphs/%s___%s.png" % (re.sub('[^a-zA-Z0-9\n\.]', '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
-    fig.savefig(png.lower())
+    fig.savefig(png.lower(),  dpi=fig.dpi)
     plt.show()
 
 
