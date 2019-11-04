@@ -5,8 +5,8 @@ from utils.math import count_min_mean_median_mode_sd_max
 
 def vertical_slice_data(data: list, index):
     """
-    Can be used to slice vertically indexed data as a list from list of tuple or list of list.
-
+    This is a reusable utility method can be used with any data set, which can be used to slice vertically indexed data
+     as a list from list of tuple or list of list.
     Examples:
          >>> print([i for i in vertical_slice_data([
          (1, "A", 1.1),
@@ -28,7 +28,8 @@ def vertical_slice_data(data: list, index):
 
 def vertical_slice_all_data(data: list):
     """
-    Can be used to slice vertically all indexed data as a list from list of tuple or list of list.
+    This is a reusable utility method can be used with any data set, which can be used to slice vertically
+    all indexed data as a list from list of tuple or list of list.
 
     Examples:
          >>> print([i for i in vertical_slice_all_data([
@@ -39,10 +40,6 @@ def vertical_slice_all_data(data: list):
     :param data: as list of tuple or list of list
     :return: all index data of all tuple as list
 
-    Raises:
-        IndexError: When index is out of.
-        TypeError: When index is not integer.
-
     .. seealso:: ``vertical_slice_data``
     """
     return [list(i) for i in list(zip(*data))]
@@ -50,7 +47,8 @@ def vertical_slice_all_data(data: list):
 
 def sort_data(data: tuple, index):
     """
-    Sort vector type data (eg, list of tuple, list of list) based on given indexed column
+    This is a reusable utility method can be used with any data set, which sorts vector type data
+     (eg, list of tuple, list of list) based on given indexed column
 
     Examples:
          >>> print([i for i in sort_data([
@@ -62,16 +60,39 @@ def sort_data(data: tuple, index):
     :param data: as list of tuple or list of index
     :param index: column index
     :return: sorted vector (list or tuple) by column index
+
+    Raises:
+        IndexError: When index is out of.
+        TypeError: When index is not integer.
+
     """
     return sorted(data, key=lambda x: x[index])
 
 
 def group_by(data: list, indexes: list):
     """
-    Groups the vector data (list of list or list ot tuple) by given one or more column indexes
+    This is a reusable utility method can be used with any data set, which groups the vector data
+    (list of list or list ot tuple) by given one or more column indexes
     :param data: as list of tuple or list of index
     :param indexes: list of column index, single element list can be used for one column
     :return: dictionary, key as column values and value as list of tuple
+
+    Examples:
+         >>> print([i for i in group_by((3, "A", 1.1), (2, "A", 2.2), (3, "C", 1.1), \
+          (1, "B", 4.3), (1, "B", 3.3), (1, "BB", 3.3), \
+           [0, 1])
+         {
+                (1, 'B'): [(1, 'B', 4.3), (1, 'B', 3.3)],
+                (1, 'BB'): [(1, 'BB', 3.3)],
+                (2, 'A'): [(2, 'A', 2.2)],
+                (3, 'A'): [(3, 'A', 1.1)],
+                (3, 'C'): [(3, 'C', 1.1)]
+        }
+
+    Raises:
+        IndexError: When index is out of.
+        TypeError: When index is not integer.
+
     """
     groups = {}  # dic for groups
     for i in data:
