@@ -31,7 +31,7 @@ def vertical_slice_all_data(data: list):
     Can be used to slice vertically all indexed data as a list from list of tuple or list of list.
 
     Examples:
-         >>> print([i for i in vertical_slice_data([
+         >>> print([i for i in vertical_slice_all_data([
          (1, "A", 1.1),
          (2, "B", 2.2),
          (3, "C", 3.3)])])
@@ -53,7 +53,7 @@ def sort_data(data: tuple, index):
     Sort vector type data (eg, list of tuple, list of list) based on given indexed column
 
     Examples:
-         >>> print([i for i in vertical_slice_data([
+         >>> print([i for i in sort_data([
          (3, "A", 1.1),
          (2, "B", 2.2),
          (1, "C", 3.3)])])
@@ -61,25 +61,31 @@ def sort_data(data: tuple, index):
 
     :param data: as list of tuple or list of index
     :param index: column index
-    :return:
+    :return: sorted vector (list or tuple) by column index
     """
     return sorted(data, key=lambda x: x[index])
 
 
-def group_by(data: list, indexes):
-    groups = {}
+def group_by(data: list, indexes: list):
+    """
+    Groups the vector data (list of list or list ot tuple) by given one or more column indexes
+    :param data: as list of tuple or list of index
+    :param indexes: list of column index, single element list can be used for one column
+    :return: dictionary, key as column values and value as list of tuple
+    """
+    groups = {}  # dic for groups
     for i in data:
-        key = []
+        key = []  # all keys
         for j in indexes:
             key.append(i[j])
-        if len(key) > 1:
+        if len(key) > 1:  # if multiple columns, key would be tuple, otherwise key would be single value avoids (k,)
             key_tuple = tuple(key)
         else:
             key_tuple = key[0]
-        if key_tuple not in groups:
+        if key_tuple not in groups:  # if key is not in dict add it it with empty list
             groups[key_tuple] = []
-        groups[key_tuple].append(i)
-    return {i: groups[i] for i in sorted(groups.keys())}
+        groups[key_tuple].append(i)  # append data to relevant group
+    return {i: groups[i] for i in sorted(groups.keys())}  # sort group by its key
 
 
 def group_count_list(data: dict):
