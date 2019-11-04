@@ -49,6 +49,20 @@ def vertical_slice_all_data(data: list):
 
 
 def sort_data(data: tuple, index):
+    """
+    Sort vector type data (eg, list of tuple, list of list) based on given indexed column
+
+    Examples:
+         >>> print([i for i in vertical_slice_data([
+         (3, "A", 1.1),
+         (2, "B", 2.2),
+         (1, "C", 3.3)])])
+         [(1, "C", 3.3), (2, "B", 2.2), (3, "A", 1.1)]
+
+    :param data: as list of tuple or list of index
+    :param index: column index
+    :return:
+    """
     return sorted(data, key=lambda x: x[index])
 
 
