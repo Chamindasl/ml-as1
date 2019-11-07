@@ -78,9 +78,9 @@ def group_by(data: list, indexes: list):
     :return: dictionary, key as column values and value as list of tuple
 
     Examples:
-         >>> print(group_by((3, "A", 1.1), (2, "A", 2.2), (3, "C", 1.1), \
-          (1, "B", 4.3), (1, "B", 3.3), (1, "BB", 3.3), \
-           [0, 1)
+         >>> print(group_by([(3, "A", 1.1), (2, "A", 2.2), (3, "C", 1.1), \
+          (1, "B", 4.3), (1, "B", 3.3), (1, "BB", 3.3)], \
+           [0, 1])
          {
                 (1, 'B'): [(1, 'B', 4.3), (1, 'B', 3.3)],
                 (1, 'BB'): [(1, 'BB', 3.3)],
