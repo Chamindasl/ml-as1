@@ -119,9 +119,10 @@ class TestData(TestCase):
             "C": [1, 2],
             "A": [1, 2, 3],
             "B": [1, 2, 4, 4],
+            "D": []
         })
-        expected = [['A', 'B', 'C'],
-                    [3, 4, 2]
+        expected = [['A', 'B', 'C', 'D'],
+                    [3, 4, 2, 0]
                     ]
 
         self.assertEqual(expected, actual)
