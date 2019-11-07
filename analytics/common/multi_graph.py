@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 def scatter_plot(data: list, indexes: list, use_seaborn=False, title=None):
     tuple_len = len(indexes)
     if tuple_len > 1:
-        logger.warning("Generating pair %s scatter plots for %s variables, this could take minutes",
+        logger.warning("Generating %s pair scatter plots for %s variables, this could take minutes",
                        tuple_len * tuple_len, tuple_len)
     use_seaborn_calculated = use_seaborn_cal(use_seaborn, tuple_len)
     fig, axes = plt.subplots(tuple_len, tuple_len, figsize=(tuple_len * 4, tuple_len * 4))

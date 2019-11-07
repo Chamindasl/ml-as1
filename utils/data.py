@@ -183,21 +183,30 @@ def two_group_count_list(data: dict):
     return result
 
 
-def filter_by_index(data: list, index, op, value):
+def filter_by_index(data: list, index, operator_txt, value):
     """
     Utility method to filter tuples as list from list of tuples based on a condition of a tuple index value.
+
     :param data: as list of tuple
     :param index: index of tuple
-    :param op: operator, eg > := gt,  = := eq
+    :param operator_txt: operator, one of ">, <, >=, <=, ="
     :param value: value of the condition.
     :return: filtered list of tuple
+
+    Raises:
+        IndexError: When index is out of.
+        TypeError: When index is not integer.
+        ValueError: When operator_txt is not accepted
+
     """
     ops = {'>': operator.gt,
            '<': operator.lt,
            '>=': operator.ge,
            '<=': operator.le,
            '=': operator.eq}
-    return [i for i in data if ops[op](i[index], value)]
+    if operator_txt not in ops:
+        raise ValueError("Not a valid operator")
+    return [i for i in data if ops[operator_txt](i[index], value)]
 
 
 def summary(data: list, fields: list):
