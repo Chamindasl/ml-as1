@@ -23,13 +23,13 @@ price_summary_all_data = summary(ab_data, [F_PRICE])
 print_summary(price_summary_all_data)
 scatter_plot(vertical_slice_all_data_list, [F_PRICE], title="Price Distribution - All Data")
 
-ab_data_p_lte_1000 = filter_by_index(ab_data, F_PRICE, '<=', 1000)
+ab_data_p_lte_1000 = filter_by_index(ab_data, F_PRICE[1], '<=', 1000)
 vertical_slice_ab_data_p_lte_1000 = vertical_slice_all_data(ab_data_p_lte_1000)
 price_summary_lte_1000 = summary(ab_data_p_lte_1000, [F_PRICE])
 print_summary(price_summary_lte_1000)
 scatter_plot(vertical_slice_ab_data_p_lte_1000, [F_PRICE], title="Price Distribution - Price less than $1000")
 
-ab_data_p_lte_500 = filter_by_index(ab_data_p_lte_1000, F_PRICE, '<=', 500)
+ab_data_p_lte_500 = filter_by_index(ab_data_p_lte_1000, F_PRICE[1], '<=', 500)
 vertical_slice_ab_data_p_lte_500 = vertical_slice_all_data(ab_data_p_lte_500)
 price_summary_lte_500 = summary(ab_data_p_lte_500, [F_PRICE])
 print_summary(price_summary_lte_500)
@@ -87,13 +87,13 @@ def visualize_price(price_data, title=None):
 
 visualize_price(ab_data_p_lte_500, title="Price < 500")
 
-ab_data_p_gte_1000 = filter_by_index(ab_data, F_PRICE, '>', 1000)
+ab_data_p_gte_1000 = filter_by_index(ab_data, F_PRICE[1], '>', 1000)
 vertical_slice_ab_data_p_gt_1000 = vertical_slice_all_data(ab_data_p_gte_1000)
 price_summary_gte_1000 = summary(ab_data_p_gte_1000, [F_PRICE])
 print_summary(price_summary_gte_1000)
 scatter_plot(vertical_slice_ab_data_p_gt_1000, [F_PRICE], title="Price Distribution - Price greater than $5000")
 
-ab_data_p_gte_5000 = filter_by_index(ab_data_p_gte_1000, F_PRICE, '>=', 5000)
+ab_data_p_gte_5000 = filter_by_index(ab_data_p_gte_1000, F_PRICE[1], '>=', 5000)
 vertical_slice_ab_data_p_gt_5000 = vertical_slice_all_data(ab_data_p_gte_5000)
 price_summary_gte_5000 = summary(ab_data_p_gte_5000, [F_PRICE])
 print_summary(price_summary_gte_5000)

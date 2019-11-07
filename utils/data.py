@@ -197,7 +197,7 @@ def filter_by_index(data: list, index, op, value):
            '>=': operator.ge,
            '<=': operator.le,
            '=': operator.eq}
-    return [i for i in data if ops[op](i[index[1]], value)]
+    return [i for i in data if ops[op](i[index], value)]
 
 
 def summary(data: list, fields: list):
