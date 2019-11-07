@@ -18,7 +18,7 @@ def vertical_slice_data(data: list, index):
     :return: index data of all tuple as list
 
     Raises:
-        IndexError: When index is out of.
+        IndexError: When index is out of range.
         TypeError: When index is not integer.
 
     .. seealso:: ``vertical_slice_all_data``
@@ -62,7 +62,7 @@ def sort_data(data: tuple, index):
     :return: sorted vector (list or tuple) by column index
 
     Raises:
-        IndexError: When index is out of.
+        IndexError: When index is out of range.
         TypeError: When index is not integer.
 
     """
@@ -90,7 +90,7 @@ def group_by(data: list, indexes: list):
         }
 
     Raises:
-        IndexError: When index is out of.
+        IndexError: When index is out of range.
         TypeError: When index is not integer.
 
     """
@@ -193,8 +193,13 @@ def filter_by_index(data: list, index, operator_txt, value):
     :param value: value of the condition.
     :return: filtered list of tuple
 
+    Examples:
+        >>> filter_by_index([(3, "A", 1.1), (2.2, "A", 2.2), (3, "C", 1.1), (1, "B", 4.3), (1, "B", 3.3), \
+         (1, "BB", 3.3)], 0, ">=", 2.2)
+         [(3, 'A', 1.1), (2.2, 'A', 2.2), (3, 'C', 1.1)]
+
     Raises:
-        IndexError: When index is out of.
+        IndexError: When index is out of range.
         TypeError: When index is not integer.
         ValueError: When operator_txt is not accepted
 
