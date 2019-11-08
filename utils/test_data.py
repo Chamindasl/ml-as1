@@ -25,7 +25,7 @@ class TestData(TestCase):
         self.assertEqual(expected_array, actual)
 
     def test_sort_data(self):
-        data = [(3, "A", 1.1), (2, "C", 2.2), (1, "B", 3.3)]
+        data = ((3, "A", 1.1), (2, "C", 2.2), (1, "B", 3.3))
         expected_array = [[(1, "B", 3.3), (2, "C", 2.2), (3, "A", 1.1)],
                           [(3, "A", 1.1), (1, "B", 3.3), (2, "C", 2.2)],
                           [(3, "A", 1.1), (2, "C", 2.2), (1, "B", 3.3)]

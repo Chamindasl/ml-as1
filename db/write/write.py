@@ -33,7 +33,7 @@ def insert_ab_data(ab_data: list):
 
 def insert_to_table(room_types, insert_command):
     con = connection.connect()
-    cur = con.cursor();
+    cur = con.cursor()
     cur.executemany(insert_command, room_types)
     con.commit()
     connection.close(con)

@@ -33,9 +33,12 @@ def create_ab_data_table():
                      reviews_per_month INTEGER,
                      calculated_host_listings_count INTEGER, 
                      availability_365 INTEGER,
-                     FOREIGN KEY (room_type_id) REFERENCES room_types (id) ON DELETE CASCADE ON UPDATE NO ACTION,
-                     FOREIGN KEY (neighbourhood_group_id) REFERENCES neighbourhood_groups (id) ON DELETE CASCADE ON UPDATE NO ACTION,
-                     FOREIGN KEY (neighbourhood_id) REFERENCES neighbourhoods (id) ON DELETE CASCADE ON UPDATE NO ACTION
+                     FOREIGN KEY (room_type_id) REFERENCES room_types (id)
+                      ON DELETE CASCADE ON UPDATE NO ACTION,
+                     FOREIGN KEY (neighbourhood_group_id) REFERENCES neighbourhood_groups (id)
+                      ON DELETE CASCADE ON UPDATE NO ACTION,
+                     FOREIGN KEY (neighbourhood_id) REFERENCES neighbourhoods (id)
+                      ON DELETE CASCADE ON UPDATE NO ACTION
                      )''')
 
 

@@ -26,7 +26,7 @@ def add_keys_with_idx(a_list: list, value):
 
 
 def process_line(one_line):
-    id, name, host_id, host_name, neighbourhood_group, neighbourhood, latitude, longitude, room_type, price, \
+    line_id, name, host_id, host_name, neighbourhood_group, neighbourhood, latitude, longitude, room_type, price, \
         minimum_nights, number_of_reviews, last_review, reviews_per_month, calculated_host_listings_count, \
         availability_365 = one_line
     room_type_id = add_keys_with_idx(room_types, room_type)

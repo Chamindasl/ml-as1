@@ -112,8 +112,8 @@ def group_by(data: list, indexes: list):
 def group_count_list(data: dict):
     """
     This is a reusable utility method can be used with any dictionary has key and corresponding data as a list, where
-    output needs to be keys as a list and values as count of data as a separate list. This kind of data structure is required for
-    graphs such as matlibplot or seaborn bar charts. Keys will be sorted for better visualization
+    output needs to be keys as a list and values as count of data as a separate list. This kind of data structure is
+    required for graphs such as matlibplot or seaborn bar charts. Keys will be sorted for better visualization
 
     Examples:
          >>> print(group_count_list({ \
