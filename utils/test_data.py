@@ -1,8 +1,7 @@
-import operator
 from unittest import TestCase
 
 from utils.data import group_count_list, vertical_slice_all_data, vertical_slice_data, sort_data, group_by, \
-    filter_by_index
+    filter_by_index, summary
 
 
 class TestData(TestCase):
@@ -147,3 +146,27 @@ class TestData(TestCase):
         self.assertRaises(ValueError, filter_by_index, data, 1, ">>>", 2.2)
         self.assertRaises(TypeError, filter_by_index, data, "1", ">", 2.2)
         self.assertRaises(IndexError, filter_by_index, data, 5, ">", 2.2)
+
+    def test_summary_list(self):
+        data = [(3, "A", 1.1), (2.2, "A", 2.2), (3, "C", 1.1), (1, "B", 4.3), (1, "B", 3.3), (1, "BB", 3.3)]
+        expected = [(('name_0', 0),
+                     {'count': 6,
+                      'max': 3,
+                      'mean': 1.8666666666666665,
+                      'median': 1.6,
+                      'min': 1,
+                      'mode': [(1, 3)],
+                      'sd': 0.993310961716756}),
+                    (('name_2', 2),
+                     {'count': 6,
+                      'max': 4.3,
+                      'mean': 2.5500000000000003,
+                      'median': 2.75,
+                      'min': 1.1,
+                      'mode': [(1.1, 2), (3.3, 2)],
+                      'sd': 1.3049904214207857})]
+        self.assertEqual(summary(data, [("name_0", 0), ("name_2", 2)]), expected)
+
+    def test_summary_list_error_cases(self):
+        data = [(3, "A", 1.1), (2.2, "A", 2.2), (3, "C", 1.1), (1, "B", 4.3), (1, "B", 3.3), (1, "BB", 3.3)]
+        self.assertRaises(TypeError, summary, data, [("name_0", 0), ("name_1", 1)])

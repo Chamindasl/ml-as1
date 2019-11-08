@@ -214,9 +214,23 @@ def filter_by_index(data: list, index, operator_txt, value):
     return [i for i in data if ops[operator_txt](i[index], value)]
 
 
-def summary(data: list, fields: list):
+def summary(data: list, indexes: list):
+    """
+    Generate the summary for given columns. Summary includes Count, Min, Mean, Median, Mode, SD, and Max
+
+    :param data: as list of tuple
+    :param indexes: index of tuple
+    :return: Summary of each index column of data
+
+    Raises:
+        IndexError: When index is out of range.
+        TypeError: When index is not integer.
+        TypeError: When column data is not numeric type.
+
+    """
+
     summary_list = []
-    for i, j in fields:
+    for i, j in indexes:
         vs_data = sorted(vertical_slice_data(data, j))
         summary_list.append(((i, j), count_min_mean_median_mode_sd_max(vs_data)))
     return summary_list
