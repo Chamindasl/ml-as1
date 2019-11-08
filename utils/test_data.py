@@ -170,3 +170,5 @@ class TestData(TestCase):
     def test_summary_list_error_cases(self):
         data = [(3, "A", 1.1), (2.2, "A", 2.2), (3, "C", 1.1), (1, "B", 4.3), (1, "B", 3.3), (1, "BB", 3.3)]
         self.assertRaises(TypeError, summary, data, [("name_0", 0), ("name_1", 1)])
+        self.assertRaises(IndexError, summary, data, [("name_0", 3), ("name_1", 1)])
+        self.assertRaises(IndexError, summary, data, [("name_0", 3), ("name_1", "1")])
