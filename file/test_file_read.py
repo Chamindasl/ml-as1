@@ -56,9 +56,12 @@ class TestData(TestCase):
         self.assertEqual(2, len(data["ab_skipped"]))
         self.assertEqual("5203", data["ab_skipped"][0][0])
         self.assertEqual("5238", data["ab_skipped"][1][0])
+        self.assertEqual(15, len(data["ab_skipped"][0]))
+        self.assertEqual(17, len(data["ab_skipped"][1]))
 
     def test_process_data_file_file_not_exist(self):
         self.assertRaises(FileNotReadableError, process_data_file, "../data/A.csv")
+        self.assertRaises(FileNotReadableError, process_data_file, "../data/AB_NYC_invalid_data.csv")
 
     def test_process_data_file_main_fle(self):
         data = process_data_file()

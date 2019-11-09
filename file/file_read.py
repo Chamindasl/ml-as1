@@ -37,6 +37,8 @@ def process_data_file(file="../data/AB_NYC_2019.csv"):
                     else:
                         data_items["ab_skipped"].append(comma_separated_line)  # skipped otherwise
                 else:  # first row as a header
+                    if not len(comma_separated_line) == 16:
+                        raise FileNotReadableError
                     data_items["ab_headers"].append(comma_separated_line)
                     read_header = True
             return data_items
