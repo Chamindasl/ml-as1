@@ -67,8 +67,8 @@ def process_line__(one_line, data_items):
     Process one row, convert cell value to correct type  and add to ab_data as a tuple
     """
     line_id, name, host_id, host_name, neighbourhood_group, neighbourhood, latitude, longitude, room_type, price, \
-    minimum_nights, number_of_reviews, last_review, reviews_per_month, calculated_host_listings_count, \
-    availability_365 = one_line  # read each item
+        minimum_nights, number_of_reviews, last_review, reviews_per_month, calculated_host_listings_count, \
+        availability_365 = one_line  # read each item
     room_type_id = add_keys_with_idx__(data_items["room_types"], room_type)  # replace room type with its index
     # replace ng with idx
     neighbourhood_group_id = add_keys_with_idx__(data_items["neighbourhood_groups"], neighbourhood_group)
