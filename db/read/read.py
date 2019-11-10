@@ -1,8 +1,13 @@
-from db import connection
+from db import connection, DATA_AB_NYC_DB
 
 
-def read_ab_data():
-    con = connection.connect()
+def read_ab_data(db_file=DATA_AB_NYC_DB):
+    """
+    Read all ab data by joining all tables as list of tuples 
+    :param db_file: db file
+    :return: result
+    """""
+    con = connection.connect(db_file)
     cur = con.cursor()
     cur.execute('SELECT '
                 'p.name,'
