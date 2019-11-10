@@ -1,7 +1,9 @@
+import unittest
 from unittest import TestCase
 
 from exceptions.file_exceptions import FileNotReadableError
 from file.file_read import process_data_file
+from definitions import ROOT_DIR
 
 HEADERS = [['id',
             'name',
@@ -22,9 +24,15 @@ HEADERS = [['id',
 
 
 class TestData(TestCase):
+    relative_path = ""
+
+    def setUp(self) -> None:
+        self.relative_path = ""
+        ## uncomment following when running from ide
+        # self.relative_path = "../"
 
     def test_process_data_file_10_lines(self):
-        data = process_data_file("../data/tmp/AB_NYC_10_lines.csv")
+        data = process_data_file(ROOT_DIR / self.relative_path / "data/tmp/AB_NYC_10_lines.csv")
         self.assertEqual([(1, 'Private room'), (2, 'Entire home/apt')], data["room_types"])
         self.assertEqual([(1, 'Brooklyn'), (2, 'Manhattan')], data["neighbourhood_groups"])
         self.assertEqual(10, len(data["neighbourhoods"]))
@@ -33,7 +41,7 @@ class TestData(TestCase):
         self.assertEqual(0, len(data["ab_skipped"]))
 
     def test_process_data_file_10_lines_2_skip(self):
-        data = process_data_file("../data/tmp/AB_NYC_10_lines_2_skip.csv")
+        data = process_data_file(ROOT_DIR / self.relative_path / "data/tmp/AB_NYC_10_lines_2_skip.csv")
         self.assertEqual([(1, 'Private room'), (2, 'Entire home/apt')], data["room_types"])
         self.assertEqual([(1, 'Brooklyn'), (2, 'Manhattan')], data["neighbourhood_groups"])
         self.assertEqual(8, len(data["neighbourhoods"]))
@@ -60,11 +68,12 @@ class TestData(TestCase):
         self.assertEqual(17, len(data["ab_skipped"][1]))
 
     def test_process_data_file_file_not_exist(self):
-        self.assertRaises(FileNotReadableError, process_data_file, "../data/tmp/A.csv")
-        self.assertRaises(FileNotReadableError, process_data_file, "../data/tmp/AB_NYC_invalid_data.csv")
+        self.assertRaises(FileNotReadableError, process_data_file, ROOT_DIR / self.relative_path / "data/tmp/A.csv")
+        self.assertRaises(FileNotReadableError, process_data_file, ROOT_DIR / self.relative_path /
+                          "data/tmp/AB_NYC_invalid_data.csv")
 
     def test_process_data_file_main_fle(self):
-        data = process_data_file()
+        data = process_data_file(ROOT_DIR / self.relative_path / "data/AB_NYC_2019.csv")
         self.assertEqual([(1, 'Private room'), (2, 'Entire home/apt'), (3, 'Shared room')], data["room_types"])
         self.assertEqual([(1, 'Brooklyn'),
                           (2, 'Manhattan'),

@@ -1,7 +1,8 @@
 from exceptions.file_exceptions import FileNotReadableError
+from definitions import ROOT_DIR
 
 
-def process_data_file(file="../data/AB_NYC_2019.csv"):
+def process_data_file(file=ROOT_DIR / "data/AB_NYC_2019.csv"):
     """
     This method is used to read AirBnB New York 2019 data. Method is tightly coupled with data set.
     First line should be header.

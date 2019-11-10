@@ -1,22 +1,23 @@
 from db import connection
+from db import DATA_AB_NYC_DB
 
 
-def create_room_types_table():
+def create_room_types_table(db_file):
     create_table('''CREATE TABLE IF NOT EXISTS room_types
-                 (id integer NOT NULL PRIMARY KEY, room_type text)''')
+                 (id integer NOT NULL PRIMARY KEY, room_type text)''', db_file)
 
 
-def create_neighbourhood_groups_table():
+def create_neighbourhood_groups_table(db_file):
     create_table('''CREATE TABLE IF NOT EXISTS neighbourhood_groups
-                 (id integer NOT NULL PRIMARY KEY, neighbourhood_group text)''')
+                 (id integer NOT NULL PRIMARY KEY, neighbourhood_group text)''', db_file)
 
 
-def create_neighbourhoods_table():
+def create_neighbourhoods_table(db_file):
     create_table('''CREATE TABLE IF NOT EXISTS neighbourhoods
-                     (id integer NOT NULL PRIMARY KEY, neighbourhood text)''')
+                     (id integer NOT NULL PRIMARY KEY, neighbourhood text)''', db_file)
 
 
-def create_ab_data_table():
+def create_ab_data_table(db_file):
     create_table('''CREATE TABLE IF NOT EXISTS ab_data
                      (
                      name text,
@@ -39,19 +40,19 @@ def create_ab_data_table():
                       ON DELETE CASCADE ON UPDATE NO ACTION,
                      FOREIGN KEY (neighbourhood_id) REFERENCES neighbourhoods (id)
                       ON DELETE CASCADE ON UPDATE NO ACTION
-                     )''')
+                     )''', db_file)
 
 
-def create_table(create_table_command):
-    conn = connection.connect()
+def create_table(create_table_command, db_file):
+    conn = connection.connect(db_file)
     cur = conn.cursor()
     cur.execute(create_table_command)
     conn.commit()
     connection.close(conn)
 
 
-def create_all_tables():
-    create_room_types_table()
-    create_neighbourhood_groups_table()
-    create_neighbourhoods_table()
-    create_ab_data_table()
+def create_all_tables(db_file=DATA_AB_NYC_DB):
+    create_room_types_table(db_file)
+    create_neighbourhood_groups_table(db_file)
+    create_neighbourhoods_table(db_file)
+    create_ab_data_table(db_file)
