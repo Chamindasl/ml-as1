@@ -1,4 +1,3 @@
-import unittest
 from unittest import TestCase
 
 from exceptions.file_exceptions import FileNotReadableError
@@ -23,12 +22,12 @@ HEADERS = [['id',
             'availability_365']]
 
 
-class TestData(TestCase):
+class TestFileRead(TestCase):
     relative_path = ""
 
     def setUp(self) -> None:
         self.relative_path = ""
-        ## uncomment following when running from ide
+        # uncomment following line when running single test from ide
         # self.relative_path = "../"
 
     def test_process_data_file_10_lines(self):

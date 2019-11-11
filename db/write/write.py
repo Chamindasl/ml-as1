@@ -1,6 +1,10 @@
+from sqlite3 import ProgrammingError, IntegrityError
+
 from db import connection, DATA_AB_NYC_DB
 from os import path
 import logging
+
+from exceptions.db_exceptions import InvalidData
 
 logger = logging.getLogger(__name__)
 
@@ -12,15 +16,10 @@ def insert_all_data(all_data: dict, db_file=DATA_AB_NYC_DB):
     :param db_file: db file
     :return: return True if insertion successful
     """
-    if not path.exists(db_file):
-        insert_room_types(all_data["room_types"], db_file)
-        insert_neighbourhood_groups(all_data["neighbourhood_groups"], db_file)
-        insert_neighbourhoods(all_data["neighbourhoods"], db_file)
-        insert_ab_data(all_data["ab_data"], db_file)
-        return True
-    else:
-        logger.warning("Database file is already exist, data will not be inserted again")
-        return False
+    insert_room_types(all_data["room_types"], db_file)
+    insert_neighbourhood_groups(all_data["neighbourhood_groups"], db_file)
+    insert_neighbourhoods(all_data["neighbourhoods"], db_file)
+    insert_ab_data(all_data["ab_data"], db_file)
 
 
 def insert_room_types(room_types: list, db_file):
@@ -28,9 +27,15 @@ def insert_room_types(room_types: list, db_file):
     Insert room type data
     :param room_types: room types as list of tuples
     :param db_file: database file
+    :raise InvalidData when data is invalid
     :return:
     """
-    insert_to_table(room_types, 'INSERT INTO room_types VALUES (?,?)', db_file)
+    try:
+        insert_to_table(room_types, 'INSERT INTO room_types VALUES (?,?)', db_file)
+    except ProgrammingError as e:
+        raise InvalidData("Provided data is invalid " + str(e))
+    except IntegrityError as e:
+        raise InvalidData("Duplicate ID " + str(e))
 
 
 def insert_neighbourhood_groups(neighbourhood_groups: list, db_file):
@@ -38,9 +43,15 @@ def insert_neighbourhood_groups(neighbourhood_groups: list, db_file):
     Insert neighbourhood groups type data
     :param neighbourhood_groups: neighbourhood groups as list of tuples
     :param db_file: database file
+    :raise InvalidData when data is invalid
     :return:
     """
-    insert_to_table(neighbourhood_groups, 'INSERT INTO neighbourhood_groups VALUES (?,?)', db_file)
+    try:
+        insert_to_table(neighbourhood_groups, 'INSERT INTO neighbourhood_groups VALUES (?,?)', db_file)
+    except ProgrammingError as e:
+        raise InvalidData("Provided data is invalid " + str(e))
+    except IntegrityError as e:
+        raise InvalidData("Duplicate ID " + str(e))
 
 
 def insert_neighbourhoods(neighbourhoods: list, db_file):
@@ -48,9 +59,15 @@ def insert_neighbourhoods(neighbourhoods: list, db_file):
     Insert neighbourhood  type data
     :param neighbourhoods: neighbourhood as list of tuples
     :param db_file: database file
+    :raise InvalidData when data is invalid
     :return:
     """
-    insert_to_table(neighbourhoods, 'INSERT INTO neighbourhoods VALUES (?,?)', db_file)
+    try:
+        insert_to_table(neighbourhoods, 'INSERT INTO neighbourhoods VALUES (?,?)', db_file)
+    except ProgrammingError as e:
+        raise InvalidData("Provided data is invalid " + str(e))
+    except IntegrityError as e:
+        raise InvalidData("Duplicate ID " + str(e))
 
 
 def insert_ab_data(ab_data: list, db_file):
@@ -58,9 +75,13 @@ def insert_ab_data(ab_data: list, db_file):
     Insert main airbnb data
     :param ab_data: airbnb data as list of tuples
     :param db_file: database file
+    :raise InvalidData when data is invalid
     :return:
     """
-    insert_to_table(ab_data, 'INSERT INTO ab_data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)', db_file)
+    try:
+        insert_to_table(ab_data, 'INSERT INTO ab_data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)', db_file)
+    except ProgrammingError as e:
+        raise InvalidData("Provided data is invalid " + str(e))
 
 
 def insert_to_table(data_list, insert_command, db_file):

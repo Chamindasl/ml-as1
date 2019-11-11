@@ -9,3 +9,4 @@ class FileNotReadableError(BaseException):
     """
     Raised when file is not readable, File is not exist or no permission to read
     """
+    pass

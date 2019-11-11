@@ -1,6 +1,9 @@
+from os import path
+
 from analytics.common.multi_graph import dist_plot, pie_plot, group_bar_plot, violin_plot
 from analytics.common.multi_graph import scatter_plot
 from const import F_PRICE, F_NUMERIC_FIELDS, F_ALL_FIELDS, F_ROOM_TYPE_ID, F_NEIGHBOURHOOD_GROUP_ID
+from db import DATA_AB_NYC_DB
 from db.write import write
 from db.init.init import create_all_tables
 from db.read import read
@@ -9,9 +12,21 @@ from utils.data import vertical_slice_all_data, summary, filter_by_index, group_
     two_group_count_list, vertical_slice_data
 from utils.print import print_summary
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+def create_tables_and_insert_data(data_to_db):
+    if not path.exists(DATA_AB_NYC_DB):
+        create_all_tables()
+        write.insert_all_data(data_to_db)
+    else:
+        logger.warning("Database file is already exist, data will not be inserted again")
+
+
 ab_data_to_db = process_data_file()
-create_all_tables()
-write.insert_all_data(ab_data_to_db)
+create_tables_and_insert_data(ab_data_to_db)
 ab_data = read.read_ab_data()
 vertical_slice_all_data_list = vertical_slice_all_data(ab_data)
 
