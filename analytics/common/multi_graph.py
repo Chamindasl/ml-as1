@@ -47,7 +47,7 @@ def plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_sea_born_calcul
             else:
                 get_axes(axes, i, j, tuple_len).hist(data[l[1]])
     except:
-        print()
+        pass
 
 
 def group_bar_plot(data: list, title=None):
@@ -85,7 +85,7 @@ def dist_plot(data_list: list, titles: list, means: list, index: tuple, title=No
                 axes[i][1].set_xlabel(index[0])
 
         except:
-            print()
+            pass
     png = "../analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
     fig.savefig(png.lower(), dpi=fig.dpi)

@@ -15,3 +15,10 @@ def print_summary(summary: list):
     print(t.draw())
 
 
+def print_file_read_summary(data_valid_read, data_skipped):
+    t = Texttable()
+    t.header(["", "Count"])
+    t.add_row(["Valid Rows", data_valid_read])
+    t.add_row(["Skipped Rows", data_skipped])
+    t.add_row(["Total Reads", data_valid_read + data_skipped])
+    print(t.draw())

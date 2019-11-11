@@ -1,7 +1,6 @@
 from sqlite3 import ProgrammingError, IntegrityError
 
 from db import connection, DATA_AB_NYC_DB
-from os import path
 import logging
 
 from exceptions.db_exceptions import InvalidData

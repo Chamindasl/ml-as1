@@ -43,7 +43,7 @@ def process_data_file(file=ROOT_DIR / "../data/AB_NYC_2019.csv"):
                     data_items["ab_headers"].append(comma_separated_line)
                     read_header = True
             return data_items
-    except:
+    except OSError:
         raise FileNotReadableError
 
 

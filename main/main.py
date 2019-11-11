@@ -2,7 +2,7 @@ from os import path
 
 from analytics.common.multi_graph import dist_plot, pie_plot, group_bar_plot, violin_plot
 from analytics.common.multi_graph import scatter_plot
-from const import F_PRICE, F_NUMERIC_FIELDS, F_ALL_FIELDS, F_ROOM_TYPE_ID, F_NEIGHBOURHOOD_GROUP_ID
+from const import F_PRICE, F_NUMERIC_FIELDS, F_ROOM_TYPE_ID, F_NEIGHBOURHOOD_GROUP_ID
 from db import DATA_AB_NYC_DB
 from db.write import write
 from db.init.init import create_all_tables
@@ -10,7 +10,7 @@ from db.read import read
 from file.file_read import process_data_file
 from utils.data import vertical_slice_all_data, summary, filter_by_index, group_count_list, group_by, \
     two_group_count_list, vertical_slice_data
-from utils.print import print_summary
+from utils.print import print_summary, print_file_read_summary
 
 import logging
 
@@ -26,6 +26,7 @@ def create_tables_and_insert_data(data_to_db):
 
 
 ab_data_to_db = process_data_file()
+print_file_read_summary(len(ab_data_to_db["ab_data"]), len(ab_data_to_db["ab_skipped"]))
 create_tables_and_insert_data(ab_data_to_db)
 ab_data = read.read_ab_data()
 vertical_slice_all_data_list = vertical_slice_all_data(ab_data)
