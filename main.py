@@ -2,7 +2,7 @@ from os import path
 
 from analytics.common.multi_graph import dist_plot, pie_plot, group_bar_plot, violin_plot
 from analytics.common.multi_graph import scatter_plot
-from const import F_PRICE, F_NUMERIC_FIELDS, F_ROOM_TYPE_ID, F_NEIGHBOURHOOD_GROUP_ID, F_ALL_FIELDS
+from const import F_PRICE, F_NUMERIC_FIELDS, F_ROOM_TYPE_ID, F_NEIGHBOURHOOD_GROUP_ID, F_ALL_FIELDS, F_AVAILABILITY_365
 from db import DATA_AB_NYC_DB
 from db.write import write
 from db.init.init import create_all_tables
@@ -35,7 +35,8 @@ def visualize_price(price_data, title=None):
     group_count_list_by_room_type.insert(1, [""])
     group_bar_plot(group_count_list_by_room_type, title="Room Listing by Room Type - " + title)
     group_count_list_by_neighbourhood_grp_id.insert(1, [""])
-    group_bar_plot(group_count_list_by_neighbourhood_grp_id, title="Room Listing by Room Type - " + title)
+    group_bar_plot(group_count_list_by_neighbourhood_grp_id, title="Room Listing by Neighbourhood Group Type - "
+                                                                   + title)
     group_count_list_by_room_type_and_neighbourhood_grp_id = two_group_count_list(
         group_by(price_data,
                  [F_ROOM_TYPE_ID[1],
@@ -63,8 +64,8 @@ ab_data = read.read_ab_data()
 vertical_slice_all_data_list = vertical_slice_all_data(ab_data)
 
 print_summary(summary(ab_data, F_NUMERIC_FIELDS))
-scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, title="Pair Scatter Plot for All Variables")
-scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, True, title="Pair Scatter Plot for All Variables")
+# scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, title="Pair Scatter Plot for All Variables")
+# scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, True, title="Pair Scatter Plot for All Variables")
 
 price_summary_all_data = summary(ab_data, [F_PRICE])
 print_summary(price_summary_all_data)
@@ -97,9 +98,6 @@ dist_plot(
     F_PRICE, title="Price Distribution Comparision - All, < 1000, < 500"
 )
 
-
-
-
 # scatter_plot(vertical_slice_ab_data_p_lte_500, F_ALL_FIELDS, True)
 
 
@@ -109,7 +107,7 @@ ab_data_p_gte_1000 = filter_by_index(ab_data, F_PRICE[1], '>', 1000)
 vertical_slice_ab_data_p_gt_1000 = vertical_slice_all_data(ab_data_p_gte_1000)
 price_summary_gte_1000 = summary(ab_data_p_gte_1000, [F_PRICE])
 print_summary(price_summary_gte_1000)
-scatter_plot(vertical_slice_ab_data_p_gt_1000, [F_PRICE], title="Price Distribution - Price greater than $5000")
+scatter_plot(vertical_slice_ab_data_p_gt_1000, [F_PRICE], title="Price Distribution - Price greater than $1000")
 
 ab_data_p_gte_5000 = filter_by_index(ab_data_p_gte_1000, F_PRICE[1], '>=', 5000)
 vertical_slice_ab_data_p_gt_5000 = vertical_slice_all_data(ab_data_p_gte_5000)
@@ -139,3 +137,9 @@ dist_plot(
 
 visualize_price(ab_data_p_gte_1000, title="Price > 1000")
 visualize_price(ab_data_p_gte_5000, title="Price > 5000")
+
+ab_data_p_gte_1000 = filter_by_index(ab_data, F_AVAILABILITY_365[1], '=', 0)
+visualize_price(ab_data_p_gte_1000, title="Availability = 0")
+
+ab_data_p_gte_1000 = filter_by_index(ab_data, F_AVAILABILITY_365[1], '>', 0)
+visualize_price(ab_data_p_gte_1000, title="Availability > 0")
