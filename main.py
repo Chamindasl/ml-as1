@@ -25,6 +25,37 @@ def create_tables_and_insert_data(data_to_db):
         logger.warning("Database file is already exist, data will not be inserted again")
 
 
+def visualize_price(price_data, title=None):
+    group_by_room_type = group_by(price_data, [F_ROOM_TYPE_ID[1]])
+    group_count_list_by_room_type = group_count_list(group_by_room_type)
+    group_by_neighbourhood_grp = group_by(price_data, [F_NEIGHBOURHOOD_GROUP_ID[1]])
+    group_count_list_by_neighbourhood_grp_id = group_count_list(group_by_neighbourhood_grp)
+    pie_plot(group_count_list_by_room_type, title="Room Listing by Room Type - " + title)
+    pie_plot(group_count_list_by_neighbourhood_grp_id, title="Room Listing by Neighbourhood Group - " + title)
+    group_count_list_by_room_type.insert(1, [""])
+    group_bar_plot(group_count_list_by_room_type, title="Room Listing by Room Type - " + title)
+    group_count_list_by_neighbourhood_grp_id.insert(1, [""])
+    group_bar_plot(group_count_list_by_neighbourhood_grp_id, title="Room Listing by Room Type - " + title)
+    group_count_list_by_room_type_and_neighbourhood_grp_id = two_group_count_list(
+        group_by(price_data,
+                 [F_ROOM_TYPE_ID[1],
+                  F_NEIGHBOURHOOD_GROUP_ID[1]]))
+    group_bar_plot(group_count_list_by_room_type_and_neighbourhood_grp_id, title="Room Listing by Room Type "
+                                                                                 "and Neighbourhood Group - " + title)
+    group_count_list_by_neighbourhood_grp_id_and_room_type = two_group_count_list(
+        group_by(price_data,
+                 [F_NEIGHBOURHOOD_GROUP_ID[1],
+                  F_ROOM_TYPE_ID[1]]))
+    group_bar_plot(group_count_list_by_neighbourhood_grp_id_and_room_type,
+                   title="Room Listing by Room Type and Neighbourhood Group - " + title)
+    price_group_by_room_type = {k: vertical_slice_data(v, F_PRICE[1]) for k, v in
+                                group_by_room_type.items()}
+    violin_plot(price_group_by_room_type, "Price KDE by Room Type - " + title)
+    price_group_by_neighbourhood_grp_id = {k: vertical_slice_data(v, F_PRICE[1])
+                                           for k, v in group_by_neighbourhood_grp.items()}
+    violin_plot(price_group_by_neighbourhood_grp_id, "Price KDE by Neighbourhood Group - " + title)
+
+
 ab_data_to_db = process_data_file()
 print_file_read_summary(len(ab_data_to_db["ab_data"]), len(ab_data_to_db["ab_skipped"]))
 create_tables_and_insert_data(ab_data_to_db)
@@ -67,35 +98,6 @@ dist_plot(
 )
 
 
-def visualize_price(price_data, title=None):
-    group_by_room_type = group_by(price_data, [F_ROOM_TYPE_ID[1]])
-    group_count_list_by_room_type = group_count_list(group_by_room_type)
-    group_by_neighbourhood_grp = group_by(price_data, [F_NEIGHBOURHOOD_GROUP_ID[1]])
-    group_count_list_by_neighbourhood_grp_id = group_count_list(group_by_neighbourhood_grp)
-    pie_plot(group_count_list_by_room_type, title="Room Listing by Room Type - " + title)
-    pie_plot(group_count_list_by_neighbourhood_grp_id, title="Room Listing by Neighbourhood Group - " + title)
-    group_count_list_by_room_type.insert(1, [""])
-    group_bar_plot(group_count_list_by_room_type, title="Room Listing by Room Type - " + title)
-    group_count_list_by_neighbourhood_grp_id.insert(1, [""])
-    group_bar_plot(group_count_list_by_neighbourhood_grp_id, title="Room Listing by Room Type - " + title)
-    group_count_list_by_room_type_and_neighbourhood_grp_id = two_group_count_list(
-        group_by(price_data,
-                 [F_ROOM_TYPE_ID[1],
-                  F_NEIGHBOURHOOD_GROUP_ID[1]]))
-    group_bar_plot(group_count_list_by_room_type_and_neighbourhood_grp_id, title="Room Listing by Room Type "
-                                                                                 "and Neighbourhood Group - " + title)
-    group_count_list_by_neighbourhood_grp_id_and_room_type = two_group_count_list(
-        group_by(price_data,
-                 [F_NEIGHBOURHOOD_GROUP_ID[1],
-                  F_ROOM_TYPE_ID[1]]))
-    group_bar_plot(group_count_list_by_neighbourhood_grp_id_and_room_type,
-                   title="Room Listing by Room Type and Neighbourhood Group - " + title)
-    price_group_by_room_type = {k: vertical_slice_data(v, F_PRICE[1]) for k, v in
-                                group_by_room_type.items()}
-    violin_plot(price_group_by_room_type, "Price KDE by Room Type - " + title)
-    price_group_by_neighbourhood_grp_id = {k: vertical_slice_data(v, F_PRICE[1])
-                                           for k, v in group_by_neighbourhood_grp.items()}
-    violin_plot(price_group_by_neighbourhood_grp_id, "Price KDE by Neighbourhood Group - " + title)
 
 
 # scatter_plot(vertical_slice_ab_data_p_lte_500, F_ALL_FIELDS, True)

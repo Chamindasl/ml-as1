@@ -27,7 +27,7 @@ def scatter_plot(data: list, indexes: list, use_sea_born=False, title=None):
             j += 1
             plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_sea_born_calculated)
         j = -1
-    png = "../analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
+    png = "analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
     fig.savefig(png.lower(),  dpi=fig.dpi)
     plt.show()
@@ -61,7 +61,7 @@ def group_bar_plot(data: list, title=None):
     plt.xticks(x_pos_leb, labels)
     plt.legend(legends)
     plt.title(title)
-    png = "../analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
+    png = "analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
     plt.savefig(png.lower())
     plt.show()
@@ -86,7 +86,7 @@ def dist_plot(data_list: list, titles: list, means: list, index: tuple, title=No
 
         except:
             pass
-    png = "../analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
+    png = "analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
     fig.savefig(png.lower(), dpi=fig.dpi)
     plt.show()
@@ -97,7 +97,7 @@ def violin_plot(data_dict: dict, title=None):
     fig.suptitle(title, color='r')
     g = sns.violinplot(data=list(data_dict.values()), ax=axes)
     g.set_xticklabels(list(data_dict.keys()))
-    png = "../analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
+    png = "analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
     fig.savefig(png.lower(),  dpi=fig.dpi)
     plt.show()
@@ -113,7 +113,7 @@ def pie_plot(data: list, title=None):
     ax.pie(sizes, labels=labels, autopct='%1.1f%%',
            shadow=True, startangle=90)
     ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    png = "../analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
+    png = "analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
     fig.savefig(png.lower(),  dpi=fig.dpi)
     plt.show()
