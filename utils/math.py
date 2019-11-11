@@ -3,10 +3,20 @@ import math
 
 
 def count(data: list):
+    """
+    Item count of any data list
+    :param data: data list
+    :return: Item count of data list
+    """
     return len(data)
 
 
 def mean(data: list):
+    """
+    Mean of numeric list
+    :param data: data list
+    :return: Mean of numeric list
+    """
     return sum(data) * 1.0 / len(data)
 
 
