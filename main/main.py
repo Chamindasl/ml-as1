@@ -2,7 +2,7 @@ from os import path
 
 from analytics.common.multi_graph import dist_plot, pie_plot, group_bar_plot, violin_plot
 from analytics.common.multi_graph import scatter_plot
-from const import F_PRICE, F_NUMERIC_FIELDS, F_ROOM_TYPE_ID, F_NEIGHBOURHOOD_GROUP_ID
+from const import F_PRICE, F_NUMERIC_FIELDS, F_ROOM_TYPE_ID, F_NEIGHBOURHOOD_GROUP_ID, F_ALL_FIELDS
 from db import DATA_AB_NYC_DB
 from db.write import write
 from db.init.init import create_all_tables
@@ -32,8 +32,8 @@ ab_data = read.read_ab_data()
 vertical_slice_all_data_list = vertical_slice_all_data(ab_data)
 
 print_summary(summary(ab_data, F_NUMERIC_FIELDS))
-# scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, title="Pair Scatter Plot for All Variables")
-# scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, True, title="Pair Scatter Plot for All Variables")
+scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, title="Pair Scatter Plot for All Variables")
+scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, True, title="Pair Scatter Plot for All Variables")
 
 price_summary_all_data = summary(ab_data, [F_PRICE])
 print_summary(price_summary_all_data)
