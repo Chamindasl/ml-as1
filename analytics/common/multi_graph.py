@@ -1,8 +1,11 @@
-from datetime import datetime
 import logging
 import re
+from datetime import datetime
+
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+from definitions import SHOW_GRAPH, SAVE_GRAPH, GRAPH_PATH
 
 SPECIAL_CHARS = '[^a-zA-Z0-9\n\\.]'
 
@@ -27,10 +30,23 @@ def scatter_plot(data: list, indexes: list, use_sea_born=False, title=None):
             j += 1
             plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_sea_born_calculated)
         j = -1
-    png = "analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
+    png = "%s%s___%s.png" % (GRAPH_PATH, re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
-    fig.savefig(png.lower(),  dpi=fig.dpi)
-    plt.show()
+    save_and_print_graph(fig, png)
+
+
+def save_and_print_graph(fig, png):
+    if SAVE_GRAPH:
+        fig.savefig(png.lower(), dpi=fig.dpi)
+    if SHOW_GRAPH:
+        plt.show()
+
+
+def save_and_print_graph_plt(png):
+    if SAVE_GRAPH:
+        plt.savefig(png.lower())
+    if SHOW_GRAPH:
+        plt.show()
 
 
 def plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_sea_born_calculated):
@@ -61,10 +77,9 @@ def group_bar_plot(data: list, title=None):
     plt.xticks(x_pos_leb, labels)
     plt.legend(legends)
     plt.title(title)
-    png = "analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
+    png = "%s%s___%s.png" % (GRAPH_PATH, re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
-    plt.savefig(png.lower())
-    plt.show()
+    save_and_print_graph_plt(png)
 
 
 def dist_plot(data_list: list, titles: list, means: list, index: tuple, title=None):
@@ -86,10 +101,9 @@ def dist_plot(data_list: list, titles: list, means: list, index: tuple, title=No
 
         except:
             pass
-    png = "analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
+    png = "%s%s___%s.png" % (GRAPH_PATH, re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
-    fig.savefig(png.lower(), dpi=fig.dpi)
-    plt.show()
+    save_and_print_graph(fig, png)
 
 
 def violin_plot(data_dict: dict, title=None):
@@ -97,10 +111,9 @@ def violin_plot(data_dict: dict, title=None):
     fig.suptitle(title, color='r')
     g = sns.violinplot(data=list(data_dict.values()), ax=axes)
     g.set_xticklabels(list(data_dict.keys()))
-    png = "analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
+    png = "%s%s___%s.png" % (GRAPH_PATH, re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
-    fig.savefig(png.lower(),  dpi=fig.dpi)
-    plt.show()
+    save_and_print_graph(fig, png)
 
 
 def pie_plot(data: list, title=None):
@@ -113,10 +126,9 @@ def pie_plot(data: list, title=None):
     ax.pie(sizes, labels=labels, autopct='%1.1f%%',
            shadow=True, startangle=90)
     ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    png = "analytics/graphs/%s___%s.png" % (re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
+    png = "%s%s___%s.png" % (GRAPH_PATH, re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
         '%Y_%m_%d_%H_%M_%S'))
-    fig.savefig(png.lower(),  dpi=fig.dpi)
-    plt.show()
+    save_and_print_graph(fig, png)
 
 
 def set_axis_labels(axes, i, j, k, l, tuple_len):
