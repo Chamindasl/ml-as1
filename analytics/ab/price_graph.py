@@ -1,5 +1,3 @@
-import logging
-
 from analytics.common.multi_graph import pie_plot, group_bar_plot, violin_plot
 from const import F_PRICE, F_ROOM_TYPE_ID, F_NEIGHBOURHOOD_GROUP_ID
 from utils.data import group_count_list, group_by, \
