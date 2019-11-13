@@ -5,10 +5,8 @@ from const import F_PRICE, F_ROOM_TYPE_ID, F_NEIGHBOURHOOD_GROUP_ID
 from utils.data import group_count_list, group_by, \
     two_group_count_list, vertical_slice_data
 
-logger = logging.getLogger(__name__)
 
-
-def visualize_price(price_data, title=None):
+def visualize_price(price_data, logger, title=None):
     """
     Reusable graph generator for Price Data. Following 8 graphs will be generated.
     1. Pie Chart by Room Type
@@ -22,6 +20,7 @@ def visualize_price(price_data, title=None):
 
     :param price_data: price data
     :param title: main title for graph
+    :param logger: main logger
     :return:
     """
     # grouping data by room type

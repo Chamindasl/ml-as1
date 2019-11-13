@@ -1,19 +1,17 @@
+import logging
 from os import path
 
 from analytics.ab.price_graph import visualize_price
-from analytics.common.multi_graph import dist_plot, pie_plot, group_bar_plot, violin_plot
+from analytics.common.multi_graph import dist_plot
 from analytics.common.multi_graph import scatter_plot
-from const import F_PRICE, F_NUMERIC_FIELDS, F_ROOM_TYPE_ID, F_NEIGHBOURHOOD_GROUP_ID, F_ALL_FIELDS, F_AVAILABILITY_365
+from const import F_PRICE, F_NUMERIC_FIELDS, F_ALL_FIELDS, F_AVAILABILITY_365
 from db import DATA_AB_NYC_DB
-from db.write import write
 from db.init.init import create_all_tables
 from db.read import read
+from db.write import write
 from file.file_read import process_data_file
-from utils.data import vertical_slice_all_data, summary, filter_by_index, group_count_list, group_by, \
-    two_group_count_list, vertical_slice_data
+from utils.data import vertical_slice_all_data, summary, filter_by_index
 from utils.print import print_summary, print_file_read_summary
-
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -57,8 +55,8 @@ print_summary(summary(ab_data, F_NUMERIC_FIELDS))  # print the summary of each d
 
 # logger.info("Generating pair scatter plots. After Graph appeared please close to proceed")  # this could take minutes
 # scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, title="Pair Scatter Plot for All Variables")
-logger.info("Generating pair scatter plots. After Graph appeared please close to proceed")  # this could take minutes
-scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, True, title="Pair Scatter Plot for All Variables")
+# logger.info("Generating pair scatter plots. After Graph appeared please close to proceed")  # this could take minutes
+# scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, True, title="Pair Scatter Plot for All Variables")
 
 """
 Analysing Price Data
@@ -118,7 +116,7 @@ dist_plot(
 """
 Visualizing Price Data where price <= 500
 """
-visualize_price(ab_data_p_lte_500, title="Price < 500")
+visualize_price(ab_data_p_lte_500, logger, title="Price < 500")
 
 """
 Analysing Price Price > 1000
@@ -163,14 +161,14 @@ dist_plot(
 """
 Analysing Price Price > 1000, Price > 5000 
 """
-visualize_price(ab_data_p_gte_1000, title="Price > 1000")
-visualize_price(ab_data_p_gte_5000, title="Price > 5000")
+visualize_price(ab_data_p_gte_1000, logger, title="Price > 1000")
+visualize_price(ab_data_p_gte_5000, logger, title="Price > 5000")
 
 """
 Analysing Price data, Availability = 0, Availability > 0
 """
 ab_data_p_gte_1000 = filter_by_index(ab_data, F_AVAILABILITY_365[1], '=', 0)
-visualize_price(ab_data_p_gte_1000, title="Availability = 0")
+visualize_price(ab_data_p_gte_1000, logger, title="Availability = 0")
 
 ab_data_p_gte_1000 = filter_by_index(ab_data, F_AVAILABILITY_365[1], '>', 0)
-visualize_price(ab_data_p_gte_1000, title="Availability > 0")
+visualize_price(ab_data_p_gte_1000, logger, title="Availability > 0")
