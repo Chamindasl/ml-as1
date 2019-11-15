@@ -41,6 +41,8 @@ def process_data_file(file=ROOT_DIR / "data/AB_NYC_2019.csv"):
                     if not len(comma_separated_line) == 16:
                         raise FileNotReadableError
                     data_items["ab_headers"].append(comma_separated_line)
+                    data_items["ab_headers"][0].pop(0)  # remove unused line_id
+                    data_items["ab_headers"][0].pop(2)  # remove unused host_name
                     read_header = True
             return data_items
     except OSError:

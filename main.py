@@ -11,7 +11,7 @@ from db.read import read
 from db.write import write
 from file.file_read import process_data_file
 from utils.data import vertical_slice_all_data, summary, filter_by_index
-from utils.print import print_summary, print_file_read_summary
+from utils.print import print_summary, print_file_read_summary, print_head
 
 logger = logging.getLogger(__name__)
 
@@ -41,6 +41,8 @@ Data ingesting and processing
 """
 logger.info("Reading data file")
 ab_data_to_db = process_data_file()  # read file
+logger.info("Printing first 10 lines of data set")
+print_head(ab_data_to_db["ab_data"], ab_data_to_db["ab_headers"][0])
 logger.info("Summary of file read")
 print_file_read_summary(len(ab_data_to_db["ab_data"]), len(ab_data_to_db["ab_skipped"]))  # print summary of read
 create_tables_and_insert_data(ab_data_to_db)  # create db tables and insert data
