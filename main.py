@@ -41,10 +41,10 @@ Data ingesting and processing
 """
 logger.info("Reading data file")
 ab_data_to_db = process_data_file()  # read file
-logger.info("Printing first 10 lines of data set")
-print_head(ab_data_to_db["ab_data"], ab_data_to_db["ab_headers"][0])
 logger.info("Summary of file read")
 print_file_read_summary(len(ab_data_to_db["ab_data"]), len(ab_data_to_db["ab_skipped"]))  # print summary of read
+logger.info("Printing first 10 lines of data set")
+print_head(ab_data_to_db["ab_data"], ab_data_to_db["ab_headers"][0])
 create_tables_and_insert_data(ab_data_to_db)  # create db tables and insert data
 ab_data = read.read_ab_data()  # read data from db
 vertical_slice_all_data_list = vertical_slice_all_data(ab_data)  # vertical slice all data, separate column data
