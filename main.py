@@ -130,7 +130,7 @@ print_summary(price_summary_gte_1000)
 scatter_plot(vertical_slice_ab_data_p_gt_1000, [F_PRICE], title="Price Distribution - Price greater than $1000")
 
 """
-Analysing Price Price > 1000
+Analysing Price Price > 5000
 """
 ab_data_p_gte_5000 = filter_by_index(ab_data_p_gte_1000, F_PRICE[1], '>=', 5000)
 vertical_slice_ab_data_p_gt_5000 = vertical_slice_all_data(ab_data_p_gte_5000)
@@ -139,7 +139,7 @@ print_summary(price_summary_gte_5000)
 scatter_plot(vertical_slice_ab_data_p_gt_5000, [F_PRICE], title="Price Distribution - Price greater than $5000")
 
 """
-Comparing Price distribution for 4 data sets, all, <= 500
+Comparing Price distribution for 4 data sets, all, <= 500, > 1000, > 5000
 """
 dist_plot(
     [
