@@ -4,10 +4,8 @@ from exceptions.file_exceptions import FileNotReadableError
 from file.file_read import process_data_file
 from definitions import ROOT_DIR
 
-HEADERS = [['id',
-            'name',
+HEADERS = [['name',
             'host_id',
-            'host_name',
             'neighbourhood_group',
             'neighbourhood',
             'latitude',
