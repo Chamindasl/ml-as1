@@ -170,7 +170,9 @@ visualize_price(ab_data_p_gte_5000, logger, title="Price > 5000")
 Analysing Price data, Availability = 0, Availability > 0
 """
 ab_data_availability_0 = filter_by_index(ab_data, F_AVAILABILITY_365[1], '=', 0)
+print_summary(summary(ab_data_availability_0, [F_PRICE]))
 visualize_price(ab_data_availability_0, logger, title="Availability = 0")
 
 ab_data_availability_gt_0 = filter_by_index(ab_data, F_AVAILABILITY_365[1], '>', 0)
+print_summary(summary(ab_data_availability_gt_0, [F_PRICE]))
 visualize_price(ab_data_availability_gt_0, logger, title="Availability > 0")
