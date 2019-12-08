@@ -15,7 +15,18 @@ From the Root folder of the project execute following commands to install applic
 From the Root folder of the project execute the following command to run all unit tests. 
 
 `python -m unittest -v`
+
 ## Running Application
 From the Root folder of the project execute the following command to run the Application 
 
- 
+`python main.py`
+
+## Configurations
+All the configurations are defined in `definitions.py` file
+
+### Scatter Plots
+Generally generating scatter plots takes longer time. Good general purpose computer (I7, 32GB RAM) takes 3 to 5 minutes.
+For low end computers it is recommended to trun OFF generating scatter plots by setting following configuration 
+`GENERATE_SCATTER_PLOT = False`
+
+Note that parameter is `True` by default 
