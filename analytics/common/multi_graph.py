@@ -5,7 +5,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from definitions import SHOW_GRAPH, SAVE_GRAPH, GRAPH_PATH
+from definitions import SHOW_GRAPH, SAVE_GRAPH, GRAPH_PATH, GENERATE_SCATTER_PLOT
 
 SPECIAL_CHARS = '[^a-zA-Z0-9\n\\.]'
 
@@ -25,28 +25,29 @@ def scatter_plot(data: list, indexes: list, use_sea_born=False, title=None):
     :param title: title of the graph
     :return:
     """
-    tuple_len = len(indexes)
-    if tuple_len > 1:
-        logger.warning("Generating %s pair scatter plots for %s variables, this could take minutes",
-                       tuple_len * tuple_len, tuple_len)
-    use_sea_born_calculated = use_sea_born_cal__(use_sea_born, tuple_len)
-    # total number of plots = tuple_len * tuple_len
-    fig, axes = plt.subplots(tuple_len, tuple_len, figsize=(tuple_len * 4, tuple_len * 4))
-    fig.suptitle(title, color='r')
-    i = -1  # axis x
-    j = -1  # axis y
-    for k in indexes:
-        i += 1
-        for l in indexes:
-            j += 1
-            # sup plot on axes [i, j]
-            plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_sea_born_calculated)
-        j = -1  # finished a row, staring next row
-    # new file name, based on given name and current time
-    png = "%s%s___%s.png" % (GRAPH_PATH, re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
-        '%Y_%m_%d_%H_%M_%S'))
-    # save and/or display graph
-    save_and_print_graph(fig, png)
+    if GENERATE_SCATTER_PLOT:
+        tuple_len = len(indexes)
+        if tuple_len > 1:
+            logger.warning("Generating %s pair scatter plots for %s variables, this could take minutes",
+                           tuple_len * tuple_len, tuple_len)
+        use_sea_born_calculated = use_sea_born_cal__(use_sea_born, tuple_len)
+        # total number of plots = tuple_len * tuple_len
+        fig, axes = plt.subplots(tuple_len, tuple_len, figsize=(tuple_len * 4, tuple_len * 4))
+        fig.suptitle(title, color='r')
+        i = -1  # axis x
+        j = -1  # axis y
+        for k in indexes:
+            i += 1
+            for l in indexes:
+                j += 1
+                # sup plot on axes [i, j]
+                plot_sub_scatter_plot(axes, data, i, j, k, l, tuple_len, use_sea_born_calculated)
+            j = -1  # finished a row, staring next row
+        # new file name, based on given name and current time
+        png = "%s%s___%s.png" % (GRAPH_PATH, re.sub(SPECIAL_CHARS, '_', title), datetime.now().strftime(
+            '%Y_%m_%d_%H_%M_%S'))
+        # save and/or display graph
+        save_and_print_graph(fig, png)
 
 
 def save_and_print_graph(fig, png):

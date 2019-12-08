@@ -12,3 +12,5 @@ SAVE_GRAPH = True
 # Path for saving graphs
 GRAPH_PATH = "analytics/graphs/"
 
+# Generate Matplotlib scatter plot
+GENERATE_SCATTER_PLOT = True
