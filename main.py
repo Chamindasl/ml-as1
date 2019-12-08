@@ -55,8 +55,8 @@ Data Summary
 logger.info("Printing summary for all fields")
 print_summary(summary(ab_data, F_NUMERIC_FIELDS))  # print the summary of each data field
 
-# logger.info("Generating pair scatter plots. After Graph appeared please close to proceed")  # this could take minutes
-# scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, title="Pair Scatter Plot for All Variables")
+logger.info("Generating pair scatter plots. After Graph appeared please close to proceed")  # this could take minutes
+scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, title="Pair Scatter Plot for All Variables")
 logger.info("Generating pair scatter plots. After Graph appeared please close to proceed")  # this could take minutes
 scatter_plot(vertical_slice_all_data_list, F_ALL_FIELDS, True, title="Pair Scatter Plot for All Variables")
 
