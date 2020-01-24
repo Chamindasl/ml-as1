@@ -29,3 +29,8 @@ jobs:
         pip install pytest
         pytest
         python main.py
+    - name: Main Application
+      run: |
+        pwd
+        mkdir analytics/graphs
+        python main.py
