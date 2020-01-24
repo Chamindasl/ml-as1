@@ -30,6 +30,6 @@ jobs:
         pytest
     - name: Main Application
       run: |
-        pwd
+        # this is need to create root folder for graphs
         mkdir analytics/graphs
         python main.py
